@@ -300,6 +300,7 @@ class PyNode {
     return nullptr;
   }
 
+  Node *get_node() { return node_.get();}
  private:
   std::string node_name_;
   std::unique_ptr<apollo::cyber::Node> node_ = nullptr;
