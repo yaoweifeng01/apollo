@@ -296,7 +296,7 @@ PyObject* cyber_delete_PyParameterClient(PyObject* self, PyObject* args) {
     AINFO << "cyber_delete_PyParameterClient:pyparameter_clt ptr is null!";
     return Py_None;
   }
-  // delete pyparameter_clt; // ywf todo why crash
+  delete pyparameter_clt;
   return Py_None;
 }
 
@@ -372,16 +372,18 @@ PyObject* cyber_PyParameter_clt_get_parameter(PyObject* self, PyObject* args) {
   return pyobj_param;
 }
 
-PyObject *cyber_PyParameter_clt_get_parameter_list(PyObject *self, PyObject *args) {
-  PyObject *pyobj_param_clt = nullptr;
+PyObject* cyber_PyParameter_clt_get_parameter_list(PyObject* self,
+                                                   PyObject* args) {
+  PyObject* pyobj_param_clt = nullptr;
   if (!PyArg_ParseTuple(
-          args, const_cast<char *>("O:cyber_PyParameter_clt_get_parameter_list"),
+          args, const_cast<char*>("O:cyber_PyParameter_clt_get_parameter_list"),
           &pyobj_param_clt)) {
-    AERROR << "cyber_PyParameter_clt_get_parameter_list:PyArg_ParseTuple failed!";
+    AERROR
+        << "cyber_PyParameter_clt_get_parameter_list:PyArg_ParseTuple failed!";
     return Py_None;
   }
 
-  auto pyparam_clt = (apollo::cyber::PyParameterClient *)PyCapsule_GetPointer(
+  auto pyparam_clt = (apollo::cyber::PyParameterClient*)PyCapsule_GetPointer(
       pyobj_param_clt, "apollo_cybertron_pyparameterclient");
   if (nullptr == pyparam_clt) {
     AERROR << "cyber_PyParameter_clt_get_parameter_list pyparam_clt is null!";
@@ -391,14 +393,14 @@ PyObject *cyber_PyParameter_clt_get_parameter_list(PyObject *self, PyObject *arg
   std::vector<apollo::cyber::Parameter> param_list;
   pyparam_clt->list_parameters(&param_list);
 
-  PyObject *pyobj_list = PyList_New(param_list.size());
+  PyObject* pyobj_list = PyList_New(param_list.size());
   size_t pos = 0;
-  for (auto & param : param_list) {
-    apollo::cyber::Parameter* param_ptr =  new apollo::cyber::Parameter(param);
+  for (auto& param : param_list) {
+    apollo::cyber::Parameter* param_ptr = new apollo::cyber::Parameter(param);
     apollo::cyber::PyParameter* pyparameter =
-      new apollo::cyber::PyParameter(param_ptr);
+        new apollo::cyber::PyParameter(param_ptr);
     PyObject* pyobj_param =
-      PyCapsule_New(pyparameter, "apollo_cybertron_pyparameter", NULL);
+        PyCapsule_New(pyparameter, "apollo_cybertron_pyparameter", NULL);
     PyList_SetItem(pyobj_list, pos, pyobj_param);
     pos++;
   }
@@ -452,7 +454,7 @@ PyObject* cyber_delete_PyParameterServer(PyObject* self, PyObject* args) {
     AINFO << "cyber_delete_PyParameterServer:pyparameter_srv ptr is null!";
     return Py_None;
   }
-  // delete pyparameter_srv; // ywf todo why crash
+  delete pyparameter_srv;
   return Py_None;
 }
 
@@ -525,16 +527,18 @@ PyObject* cyber_PyParameter_srv_get_parameter(PyObject* self, PyObject* args) {
   return pyobj_param;
 }
 
-PyObject *cyber_PyParameter_srv_get_parameter_list(PyObject *self, PyObject *args) {
-  PyObject *pyobj_param_srv = nullptr;
+PyObject* cyber_PyParameter_srv_get_parameter_list(PyObject* self,
+                                                   PyObject* args) {
+  PyObject* pyobj_param_srv = nullptr;
   if (!PyArg_ParseTuple(
-          args, const_cast<char *>("O:cyber_PyParameter_srv_get_parameter_list"),
+          args, const_cast<char*>("O:cyber_PyParameter_srv_get_parameter_list"),
           &pyobj_param_srv)) {
-    AERROR << "cyber_PyParameter_srv_get_parameter_list:PyArg_ParseTuple failed!";
+    AERROR
+        << "cyber_PyParameter_srv_get_parameter_list:PyArg_ParseTuple failed!";
     return Py_None;
   }
 
-  auto pyparam_srv = (apollo::cyber::PyParameterServer *)PyCapsule_GetPointer(
+  auto pyparam_srv = (apollo::cyber::PyParameterServer*)PyCapsule_GetPointer(
       pyobj_param_srv, "apollo_cybertron_pyparameterserver");
   if (nullptr == pyparam_srv) {
     AERROR << "cyber_PyParameter_srv_get_parameter_list pyparam_srv is null!";
@@ -544,14 +548,14 @@ PyObject *cyber_PyParameter_srv_get_parameter_list(PyObject *self, PyObject *arg
   std::vector<apollo::cyber::Parameter> param_list;
   pyparam_srv->list_parameters(&param_list);
 
-  PyObject *pyobj_list = PyList_New(param_list.size());
+  PyObject* pyobj_list = PyList_New(param_list.size());
   size_t pos = 0;
-  for (auto & param : param_list) {
-    apollo::cyber::Parameter* param_ptr =  new apollo::cyber::Parameter(param);
+  for (auto& param : param_list) {
+    apollo::cyber::Parameter* param_ptr = new apollo::cyber::Parameter(param);
     apollo::cyber::PyParameter* pyparameter =
-      new apollo::cyber::PyParameter(param_ptr);
+        new apollo::cyber::PyParameter(param_ptr);
     PyObject* pyobj_param =
-      PyCapsule_New(pyparameter, "apollo_cybertron_pyparameter", NULL);
+        PyCapsule_New(pyparameter, "apollo_cybertron_pyparameter", NULL);
     PyList_SetItem(pyobj_list, pos, pyobj_param);
     pos++;
   }
@@ -581,8 +585,8 @@ static PyMethodDef _cyber_parameter_methods[] = {
      METH_VARARGS, ""},
     {"PyParameter_clt_get_parameter", cyber_PyParameter_clt_get_parameter,
      METH_VARARGS, ""},
-     {"PyParameter_clt_get_parameter_list", cyber_PyParameter_clt_get_parameter_list,
-     METH_VARARGS, ""},
+    {"PyParameter_clt_get_parameter_list",
+     cyber_PyParameter_clt_get_parameter_list, METH_VARARGS, ""},
 
     {"new_PyParameterServer", cyber_new_PyParameterServer, METH_VARARGS, ""},
     {"delete_PyParameterServer", cyber_delete_PyParameterServer, METH_VARARGS,
@@ -591,8 +595,8 @@ static PyMethodDef _cyber_parameter_methods[] = {
      METH_VARARGS, ""},
     {"PyParameter_srv_get_parameter", cyber_PyParameter_srv_get_parameter,
      METH_VARARGS, ""},
-     {"PyParameter_srv_get_parameter_list", cyber_PyParameter_srv_get_parameter_list,
-     METH_VARARGS, ""},
+    {"PyParameter_srv_get_parameter_list",
+     cyber_PyParameter_srv_get_parameter_list, METH_VARARGS, ""},
 
     {NULL, NULL, 0, NULL} /* sentinel */
 };

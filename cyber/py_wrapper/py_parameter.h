@@ -77,14 +77,11 @@ class PyParameter {
 
 class PyParameterClient {
  public:
-  PyParameterClient(Node* node, const std::string& service_node_name) {
-    std::shared_ptr<Node> shared_node;
-    shared_node.reset(node);
-    parameter_clt_ =
-        std::make_shared<ParameterClient>(shared_node, service_node_name);
-    AERROR << "PyParameterClient con";
+  PyParameterClient(std::shared_ptr<Node> node,
+                    const std::string& service_node_name) {
+    parameter_clt_ = std::make_shared<ParameterClient>(node, service_node_name);
   }
-  ~PyParameterClient() { AERROR << "~PyParameterClient"; }
+  ~PyParameterClient() {}
 
   bool set_parameter(const Parameter& parameter) {
     return parameter_clt_->SetParameter(parameter);
@@ -95,19 +92,17 @@ class PyParameterClient {
   bool list_parameters(std::vector<Parameter>* parameters) {
     return parameter_clt_->ListParameters(parameters);
   }
+
  private:
   std::shared_ptr<ParameterClient> parameter_clt_ = nullptr;
 };
 
 class PyParameterServer {
  public:
-  PyParameterServer(Node* node) {
-    std::shared_ptr<Node> shared_node;
-    shared_node.reset(node);
-    parameter_srv_ = std::make_shared<ParameterServer>(shared_node);
-    AERROR << "PyParameterServer con";
+  PyParameterServer(std::shared_ptr<Node> node) {
+    parameter_srv_ = std::make_shared<ParameterServer>(node);
   }
-  ~PyParameterServer() { AERROR << "~PyParameterServer"; }
+  ~PyParameterServer() {}
 
   void set_parameter(const Parameter& parameter) {
     parameter_srv_->SetParameter(parameter);
@@ -118,6 +113,7 @@ class PyParameterServer {
   void list_parameters(std::vector<Parameter>* parameters) {
     parameter_srv_->ListParameters(parameters);
   }
+
  private:
   std::shared_ptr<ParameterServer> parameter_srv_ = nullptr;
 };

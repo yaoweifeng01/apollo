@@ -72,6 +72,6 @@ def print_param_srv():
 
 if __name__ == '__main__':
     cyber.init()
-    #print_param_info()
+    print_param_info()
     print_param_srv()
     cyber.shutdown()
