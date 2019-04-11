@@ -3,20 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to cyber-rt's documentation!
-====================================
-
-Contents:
+Welcome to CyberRT Documentation
+===================================
 
 .. toctree::
    :maxdepth: 2
+   :caption: Contents:
 
+Introduction
+============
+This is the introduction of demo。
 
+API
+===
+:doc:`CyberRT Python API  </cyber_py>`
 
 Indices and tables
 ==================
-
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
