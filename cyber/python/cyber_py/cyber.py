@@ -222,9 +222,9 @@ class Node(object):
         @param name str: topic name
         @param data_type proto: message class for serialization
         @callback fn: function to call (fn(data)) when data is
-                   received. If args is set, the function must
-                   accept the args as a second argument,
-                   i.e. fn(data, args)
+        received. If args is set, the function must
+        accept the args as a second argument,
+        i.e. fn(data, args)
         @args any: additional arguments to pass to the callback
         """
         self.mutex.acquire()
@@ -278,7 +278,13 @@ class Node(object):
             _CYBER_NODE.PyService_write(v[0], response.SerializeToString())
         return 0
 
-    def create_service(self, name, req_data_type, res_data_type, callback, args=None):
+    def create_service(
+        self,
+        name,
+        req_data_type,
+        res_data_type,
+        callback,
+            args=None):
         self.mutex.acquire()
         if name in self.services.keys():
             self.mutex.release()

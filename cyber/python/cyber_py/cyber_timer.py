@@ -72,7 +72,7 @@ class Timer(object):
         period The period of the timer, unit is ms
         callback The tasks that the timer needs to perform
         oneshot 1: perform the callback only after the first timing cycle
-                0:perform the callback every timed period
+        0:perform the callback every timed period
         '''
         self.timer_cb = PY_TIMER_CB_TYPE(callback)
         self.f_ptr_cb = ctypes.cast(self.timer_cb, ctypes.c_void_p).value
