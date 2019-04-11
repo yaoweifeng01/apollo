@@ -2,17 +2,9 @@ API
 ===
 
 .. automodule:: run
-
-.. automodule:: cyber
    :members:
 
-.. automodule:: record
-   :members:
-
-.. automodule:: cyber_time
-   :members:
-
-.. automodule:: cyber_timer
+.. automodule:: cyber 
    :members:
 
 Indices and tables
