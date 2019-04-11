@@ -4,8 +4,9 @@ API
 .. automodule:: run
    :members:
 
-.. automodule:: cyber 
+.. automodule:: cyber1
    :members:
+
 
 Indices and tables
 ==================
