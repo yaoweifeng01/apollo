@@ -1,6 +1,8 @@
 API
 ===
 
+.. automodule:: run
+
 .. automodule:: cyber
    :members:
 
