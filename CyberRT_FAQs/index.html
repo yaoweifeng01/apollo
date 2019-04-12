@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Apollo Cyber RT FAQs - CyberRT Documents</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Apollo Cyber RT FAQs";
+    var mkdocs_page_input_path = "CyberRT_FAQs.md";
+    var mkdocs_page_url = "/CyberRT_FAQs/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> CyberRT Documents</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Apollo Cyber RT</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../CyberRT_API_for_Developers/">Cyber RT API for Developers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../CyberRT_Developer_Tools/">Apollo Cyber RT Developer Tools</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Apollo Cyber RT FAQs</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#apollo-cyber-rt-faqs">Apollo Cyber RT FAQs</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#what-is-apollo-cyber-rt">What is Apollo Cyber RT?</a></li>
+        
+            <li><a class="toctree-l3" href="#why-did-we-decide-to-work-on-a-new-runtime-framework">Why did we decide to work on a new runtime framework?</a></li>
+        
+            <li><a class="toctree-l3" href="#what-are-the-advantages-of-the-new-runtime-framework">What are the advantages of the new runtime framework?</a></li>
+        
+            <li><a class="toctree-l3" href="#can-we-still-use-the-data-that-we-have-collected">Can we still use the data that we have collected?</a></li>
+        
+            <li><a class="toctree-l3" href="#will-you-continue-to-support-ros">Will you continue to support ROS?</a></li>
+        
+            <li><a class="toctree-l3" href="#will-apollo-cyber-rt-affect-regular-code-development">Will Apollo Cyber RT affect regular code development?</a></li>
+        
+            <li><a class="toctree-l3" href="#recommended-setup-for-apollo-cyber-rt">Recommended setup for Apollo Cyber RT</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../CyberRT_Migration_Guide/">CyberRT Migration Guide</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../CyberRT_Quick_Start/">CyberRT Quick Start</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../CyberRT_Quick_Start_cn/">CyberRT Quick Start cn</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../CyberRT_Terms/">CyberRT Terms</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../README/">README</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">CyberRT Documents</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Apollo Cyber RT FAQs</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="apollo-cyber-rt-faqs">Apollo Cyber RT FAQs</h1>
+<h2 id="what-is-apollo-cyber-rt">What is Apollo Cyber RT?</h2>
+<p>Apollo's Cyber RT is an open source runtime framework designed specifically for autonomous driving scenarios. Based on a centralized computing model, it is highly optimized for performance, latency, and data throughput</p>
+<hr />
+<h2 id="why-did-we-decide-to-work-on-a-new-runtime-framework">Why did we decide to work on a new runtime framework?</h2>
+<ul>
+<li>
+<p>During years of development of autonomous driving technologies, we have learned a lot from our previous experience with Apollo. In autonomous driving scenarious, we need an effective centralized computing model, with demands for high performance,  including high concurrency, low latency and high throughput。</p>
+</li>
+<li>
+<p>The industry is evolving, so does Apollo. Going forward, Apollo has already moved from development to productization, with volume deployments in the real world, we see the demands for the highest robustness and high performance. That’s why we spent years of building Apollo Cyber RT, which addresses that requirements of autonomous driving solutions. </p>
+</li>
+</ul>
+<hr />
+<h2 id="what-are-the-advantages-of-the-new-runtime-framework">What are the advantages of the new runtime framework?</h2>
+<ul>
+<li>Accelerate development</li>
+<li>Well defined task interface with data fusion</li>
+<li>Array of development tools</li>
+<li>Large set of sensor drivers</li>
+<li>Simplify deployment</li>
+<li>Efficient and adaptive message communication</li>
+<li>Configurable user level scheduler with resource awareness</li>
+<li>Portable with fewer dependencies</li>
+<li>Empower your own autonomous vehicles</li>
+<li>The default open source runtime framework</li>
+<li>Building blocks specifically designed for autonomous driving</li>
+<li>Plug and play your own AD system</li>
+</ul>
+<hr />
+<h2 id="can-we-still-use-the-data-that-we-have-collected">Can we still use the data that we have collected?</h2>
+<ul>
+<li>If the data you have collected is compatible with the previous versions of Apollo, you could use our recommended conversion tools to make the data compliant with our new runtime framework</li>
+<li>If you created a customized data format, then the previously generated data will not be supported by the new runtime framework</li>
+</ul>
+<hr />
+<h2 id="will-you-continue-to-support-ros">Will you continue to support ROS?</h2>
+<p>We will continue to support previous Apollo releases (3.0 and before) based on ROS. We do appreciate you continue growing with us and highly encourage you to move to Apollo 3.5. While we know that some of our developers would prefer to work on ROS, we do hope you will understand why Apollo as a team cannot continue to support ROS in our future releases as we strive to work towards developing a more holistic platform that meets automotive standards. </p>
+<hr />
+<h2 id="will-apollo-cyber-rt-affect-regular-code-development">Will Apollo Cyber RT affect regular code development?</h2>
+<p>If you have not modified anything at runtime framework layer and have only worked on Apollo's module code base, you will not be affected by the introduction of our new runtime framework as most of time you would only need to re-interface the access of the input and output data. Additional documents are under <a href="https://github.com/ApolloAuto/apollo/tree/master/docs/cyber/">cyber</a> with more details.</p>
+<hr />
+<h2 id="recommended-setup-for-apollo-cyber-rt">Recommended setup for Apollo Cyber RT</h2>
+<ul>
+<li>Currently the runtime framework only supports running on Trusty (Ubuntu 14.04)</li>
+<li>The runtime framework also uses apollo's docker environment</li>
+<li>It is recommended to run source setup.bash when opening a new terminal</li>
+<li>Fork and clone the Apollo repo with the new framework code which can be found at <a href="https://github.com/ApolloAuto/apollo/tree/master/cyber/">apollo/cyber</a></li>
+</ul>
+<hr />
+<p>More FAQs to follow...</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../CyberRT_Migration_Guide/" class="btn btn-neutral float-right" title="CyberRT Migration Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../CyberRT_Developer_Tools/" class="btn btn-neutral" title="Apollo Cyber RT Developer Tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../CyberRT_Developer_Tools/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../CyberRT_Migration_Guide/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
