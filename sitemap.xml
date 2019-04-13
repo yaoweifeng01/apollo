@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://www.mkdocs.org/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/CyberRT_API_for_Developers/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/CyberRT_API_for_Developers/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/CyberRT_Developer_Tools/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/CyberRT_Developer_Tools/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/CyberRT_FAQs/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/CyberRT_FAQs/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/CyberRT_Migration_Guide/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/CyberRT_Migration_Guide/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/CyberRT_Quick_Start/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/CyberRT_Quick_Start/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/CyberRT_Quick_Start_cn/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/CyberRT_Quick_Start_cn/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/CyberRT_Terms/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/CyberRT_Terms/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://www.mkdocs.org/README/</loc>
-     <lastmod>2019-04-12</lastmod>
+     <loc>/README/</loc>
+     <lastmod>2019-04-13</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
