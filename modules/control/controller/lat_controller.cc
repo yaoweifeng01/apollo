@@ -397,11 +397,12 @@ Status LatController::ComputeControlCommand(
                                   matrix_r_, lqr_eps_, lqr_max_iteration_,
                                   &matrix_k_);
   } else {
-    common::math::SolveLQRProblem(matrix_adc_, matrix_bdc_, matrix_q_,
-                                  matrix_r_, lqr_eps_, lqr_max_iteration_,
-                                  &matrix_k_);
+    // common::math::SolveLQRProblem(matrix_adc_, matrix_bdc_, matrix_q_,
+    //                               matrix_r_, lqr_eps_, lqr_max_iteration_,
+    //                               &matrix_k_);
   }
-
+  AERROR << "ywf: ComputeControlCommand sleep 15ms";
+  usleep(15000); // 15ms = 15000us
   // feedback = - K * state
   // Convert vehicle steer angle from rad to degree and then to steer degree
   // then to 100% ratio

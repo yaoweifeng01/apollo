@@ -260,6 +260,7 @@ Status ControlComponent::ProduceControlCommand(
 
 bool ControlComponent::Proc() {
   double start_timestamp = Clock::NowInSeconds();
+  AERROR << "ywf Proc control component.";
 
   chassis_reader_->Observe();
   const auto &chassis_msg = chassis_reader_->GetLatestObserved();

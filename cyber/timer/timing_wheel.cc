@@ -61,6 +61,7 @@ TimingWheel::TimingWheel(const Duration& tick_duration) {
 
 uint64_t TimingWheel::StartTimer(uint64_t interval, CallHandler handler,
                                  bool oneshot) {
+  AERROR << "ywf Timerwheel starttimer begin.";
   if (id_counter_ > UINT64_MAX) {
     AERROR << "Timer ID pool is full.";
     return -1;
@@ -83,11 +84,11 @@ uint64_t TimingWheel::StartTimer(uint64_t interval, CallHandler handler,
       },
       oneshot);
   if (add_queue_.Enqueue(task)) {
-    ADEBUG << "start timer id: " << id_counter_;
+    AERROR << "ywf start timer id: " << id_counter_;
     return id_counter_;
   } else {
     --id_counter_;
-    AERROR << "add queue is full, Enqueue failed!";
+    AERROR << "ywf add queue is full, Enqueue failed!";
     return -1;
   }
 }
