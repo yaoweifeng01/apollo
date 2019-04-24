@@ -1,0 +1,773 @@
+Construct a new Parameter\-Service object
+
+This document provides an extensive technical deep dive into how to create, manipulate and use Cyber R\-T's A\-P\-I.
+
+\subsection*{Table of Contents}
+
+
+\begin{DoxyItemize}
+\item \href{#Talker-Listener}{\tt Talker-\/\-Listener}
+\item \href{#Service-Creation-and-Use}{\tt Service Creation and Use}
+\item \href{#Param-parameter-service}{\tt Param parameter service}
+\item \href{#LOG-API}{\tt Log A\-P\-I}
+\item \href{#Building-a-module-based-on-Component}{\tt Building a module based on Component}
+\item \href{#Launch}{\tt Launch}
+\item \href{#timer}{\tt Timer}
+\item \href{#use-of-time}{\tt Time A\-P\-I}
+\item \href{#Record-file-Read-and-Write}{\tt Record file\-: Read and Write}
+\item \href{##API-Directory}{\tt C++ A\-P\-I Directory}
+\begin{DoxyItemize}
+\item \href{#node-api}{\tt Node}
+\item \href{#writer-api}{\tt Writer}
+\item \href{#client-api}{\tt Client}
+\item \href{#parameter-api}{\tt Parameter}
+\item \href{#timer-api}{\tt Timer}
+\item \href{#timer-api}{\tt Time}
+\item \href{#duration-api}{\tt Duration}
+\item \href{#rate-api}{\tt Rate}
+\item \href{#recordreader-api}{\tt Record\-Reader}
+\item \href{#recordwriter-api}{\tt Record\-Writer}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsection*{Talker-\/\-Listener}
+
+The first part of demonstrating Cyber\-R\-T A\-P\-I is to understand the Talker/\-Listener example. Following are three essential concepts\-: node (basic unit), reader(facility to read message) and writer(facility to write message) of the example.
+
+\subsubsection*{Create a node}
+
+In the Cyber\-R\-T framework, the node is the most fundamental unit, similar to the role of a {\ttfamily handle}. When creating a specific functional object (writer, reader, etc.), you need to create it based on an existing node instance. The node creation interface is as follows\-:
+
+```\-C std\-::unique\-\_\-ptr$<$\-Node$>$ \hyperlink{namespaceapollo_1_1cyber_ae369c5de0279f2a5745d0438d532bc89}{apollo\-::cyber\-::\-Create\-Node}(const std\-::string\& node\-\_\-name, const std\-::string\& name\-\_\-space = \char`\"{}\char`\"{}); ```
+
+
+\begin{DoxyItemize}
+\item Parameters\-:
+\begin{DoxyItemize}
+\item node\-\_\-name\-: name of the node, globally unique identifier
+\item name\-\_\-space\-: name of the space where the node is located ``` name\-\_\-space is empty by default. It is the name of the space concatenated with node\-\_\-name. The format is /namespace/node\-\_\-name ```
+\end{DoxyItemize}
+\item Return value -\/ An exclusive smart pointer to Node
+\item Error Conditions -\/ when {\ttfamily \hyperlink{namespaceapollo_1_1cyber_a2d055a81b338116634deaf8ac3367aca}{cyber\-::\-Init()}} has not called, the system is in an uninitialized state, unable to create a node, return nullptr
+\end{DoxyItemize}
+
+\subsubsection*{Create a writer}
+
+The writer is the basic facility used in Cyber\-R\-T to send messages. Every writer corresponds to a channel with a specific data type. The writer is created by the {\ttfamily Create\-Writer} interface in the node class. The interfaces are listed as below\-:
+
+```\-C template $<$typename messaget$>$=\char`\"{}\char`\"{}$>$ auto Create\-Writer(const std\-::string\& channel\-\_\-name) -\/$>$ std\-::shared\-\_\-ptr$<$Writer$<$\-Message\-T$>$$>$; template $<$typename messaget$>$=\char`\"{}\char`\"{}$>$ auto Create\-Writer(const proto\-::\-Role\-Attributes\& role\-\_\-attr) -\/$>$ std\-::shared\-\_\-ptr$<$Writer$<$\-Message\-T$>$$>$;
+
+```
+\begin{DoxyItemize}
+\item Parameters\-:
+\begin{DoxyItemize}
+\item channel\-\_\-name\-: the name of the channel to write to
+\item Message\-T\-: The type of message to be written out
+\end{DoxyItemize}
+\item Return value -\/ Shared pointer to the Writer object
+\end{DoxyItemize}
+
+\subsubsection*{Create a reader}
+
+The reader is the basic facility used in cyber to receive messages. Reader has to be bound to a callback function when it is created. When a new message arrives in the channel, the callback will be called. The reader is created by the {\ttfamily Create\-Reader} interface of the node class. The interfaces are listed as below\-:
+
+```\-C template $<$typename messaget$>$=\char`\"{}\char`\"{}$>$ auto Create\-Reader(const std\-::string\& channel\-\_\-name, const std\-::function$<$void(const std\-::shared\-\_\-ptr$<$\-Message\-T$>$\&)$>$\& reader\-\_\-func) -\/$>$ std\-::shared\-\_\-ptr$<$Reader$<$\-Message\-T$>$$>$;
+
+template $<$typename messaget$>$=\char`\"{}\char`\"{}$>$ auto Create\-Reader(const Reader\-Config\& config, const Callback\-Func$<$\-Message\-T$>$\& reader\-\_\-func = nullptr) -\/$>$ std\-::shared\-\_\-ptr$<$cyber\-::\-Reader$<$\-Message\-T$>$$>$;
+
+template $<$typename messaget$>$=\char`\"{}\char`\"{}$>$ auto Create\-Reader(const proto\-::\-Role\-Attributes\& role\-\_\-attr, const Callback\-Func$<$\-Message\-T$>$\& reader\-\_\-func = nullptr) -\/$>$ std\-::shared\-\_\-ptr$<$cyber\-::\-Reader$<$\-Message\-T$>$$>$; ```
+\begin{DoxyItemize}
+\item Parameters\-:
+\begin{DoxyItemize}
+\item Message\-T\-: The type of message to read
+\item channel\-\_\-name\-: the name of the channel to receive from
+\item reader\-\_\-func\-: callback function to process the messages
+\end{DoxyItemize}
+\item Return value -\/ Shared pointer to the Reader object
+\end{DoxyItemize}
+
+\subsubsection*{Code Example}
+
+\paragraph*{Talker (cyber/examples/talker.\-cc)}
+
+```\-C \#include \char`\"{}cyber/cyber.\-h\char`\"{} \#include \char`\"{}cyber/proto/chatter.\-pb.\-h\char`\"{} \#include \char`\"{}cyber/time/rate.\-h\char`\"{} \#include \char`\"{}cyber/time/time.\-h\char`\"{} using \hyperlink{classapollo_1_1cyber_1_1Rate}{apollo\-::cyber\-::\-Rate}; using \hyperlink{classapollo_1_1cyber_1_1Time}{apollo\-::cyber\-::\-Time}; using apollo\-::cyber\-::proto\-::\-Chatter; int main(int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}) \{ // init cyber framework apollo\-::cyber\-::\-Init(argv\mbox{[}0\mbox{]}); // create talker node std\-::shared\-\_\-ptr$<$apollo\-::cyber\-::\-Node$>$ talker\-\_\-node( \hyperlink{namespaceapollo_1_1cyber_ae369c5de0279f2a5745d0438d532bc89}{apollo\-::cyber\-::\-Create\-Node}(\char`\"{}talker\char`\"{})); // create talker auto talker = talker\-\_\-node-\/$>$Create\-Writer$<$\-Chatter$>$(\char`\"{}channel/chatter\char`\"{}); Rate rate(1.\-0); while (\hyperlink{namespaceapollo_1_1cyber_aafa5f9962b51918897897bbc0fdd802f}{apollo\-::cyber\-::\-O\-K()}) \{ static uint64\-\_\-t seq = 0; auto msg = std\-::make\-\_\-shared$<$apollo\-::cyber\-::proto\-::\-Chatter$>$(); msg-\/$>$set\-\_\-timestamp(Time\-::\-Now().To\-Nanosecond()); msg-\/$>$set\-\_\-lidar\-\_\-timestamp(Time\-::\-Now().To\-Nanosecond()); msg-\/$>$set\-\_\-seq(seq++); msg-\/$>$set\-\_\-content(\char`\"{}\-Hello, apollo!\char`\"{}); talker-\/$>$Write(msg); A\-I\-N\-F\-O $<$$<$ \char`\"{}talker sent a message!\char`\"{}; rate.\-Sleep(); \} return 0; \} ```
+
+\paragraph*{Listener (cyber/examples/listener.\-cc)}
+
+```\-C \#include \char`\"{}cyber/cyber.\-h\char`\"{} \#include \char`\"{}cyber/proto/chatter.\-pb.\-h\char`\"{} void Message\-Callback( const std\-::shared\-\_\-ptr$<$apollo\-::cyber\-::proto\-::\-Chatter$>$\& msg) \{ A\-I\-N\-F\-O $<$$<$ \char`\"{}\-Received message seq-\/$>$ \char`\"{} $<$$<$ msg-\/$>$seq(); A\-I\-N\-F\-O $<$$<$ \char`\"{}msgcontent-\/$>$\char`\"{} $<$$<$ msg-\/$>$content(); \} int main(int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}) \{ // init cyber framework apollo\-::cyber\-::\-Init(argv\mbox{[}0\mbox{]}); // create listener node auto listener\-\_\-node = \hyperlink{namespaceapollo_1_1cyber_ae369c5de0279f2a5745d0438d532bc89}{apollo\-::cyber\-::\-Create\-Node}(\char`\"{}listener\char`\"{}); // create listener auto listener = listener\-\_\-node-\/$>$Create\-Reader$<$apollo\-::cyber\-::proto\-::\-Chatter$>$( \char`\"{}channel/chatter\char`\"{}, Message\-Callback); \hyperlink{namespaceapollo_1_1cyber_a7929114e78a9c595b0ee715968ca2712}{apollo\-::cyber\-::\-Wait\-For\-Shutdown()}; return 0; \} ``` \paragraph*{Bazel B\-U\-I\-L\-D file(cyber/samples/\-B\-U\-I\-L\-D)}
+
+```bazel cc\-\_\-binary( name = \char`\"{}talker\char`\"{}, srcs = \mbox{[} \char`\"{}talker.\-cc\char`\"{}, \mbox{]}, deps = \mbox{[} \char`\"{}//cyber\char`\"{}, \char`\"{}//cyber/examples/proto\-:examples\-\_\-cc\-\_\-proto\char`\"{}, \mbox{]}, )
+
+cc\-\_\-binary( name = \char`\"{}listener\char`\"{}, srcs = \mbox{[} \char`\"{}listener.\-cc\char`\"{}, \mbox{]}, deps = \mbox{[} \char`\"{}//cyber\char`\"{}, \char`\"{}//cyber/examples/proto\-:examples\-\_\-cc\-\_\-proto\char`\"{}, \mbox{]}, ) ``` \paragraph*{Build and Run}
+
+
+\begin{DoxyItemize}
+\item Build\-: bazel build cyber/examples/…
+\item Run talker/listener in different terminals\-:
+\begin{DoxyItemize}
+\item ./bazel-\/bin/cyber/examples/talker
+\item ./bazel-\/bin/cyber/examples/listener
+\end{DoxyItemize}
+\item Examine the results\-: you should see message printing out on listener.
+\end{DoxyItemize}
+
+\subsection*{Service Creation and Use}
+
+\subsubsection*{Introduction}
+
+In an autonomous driving system, there are many scenarios that require more from module communication than just sending or receiving messages. Service is another way of communication between nodes. Unlike channel, service implements {\ttfamily two-\/way} communication, e.\-g. a node obtains a response by sending a request. This section introduces the {\ttfamily service} module in Cyber\-R\-T A\-P\-I with examples.
+
+\subsubsection*{Demo -\/ Example}
+
+Problem\-: create a client-\/server model that pass Driver.\-proto back and forth. When a request is sent in by the client, the server parses/processes the request and returns the response.
+
+The implementation of the demo mainly includes the following steps.
+
+\paragraph*{Define request and response messages}
+
+All messages in cyber are in the {\ttfamily protobuf} format. Any protobuf message with serialize/deserialize interfaces can be used as the service request and response message. {\ttfamily Driver} in examples.\-proto is used as service request and response in this example\-:
+
+```protobuf // filename\-: examples.\-proto syntax = \char`\"{}proto2\char`\"{}; package apollo.\-cyber.\-examples.\-proto; message Driver \{ optional string content = 1; optional uint64 msg\-\_\-id = 2; optional uint64 timestamp = 3; \}; ``` \paragraph*{Create a service and a client}
+
+```c // filename\-: cyber/examples/service.\-cc \#include \char`\"{}cyber/cyber.\-h\char`\"{} \#include \char`\"{}cyber/examples/proto/examples.\-pb.\-h\char`\"{}
+
+using apollo\-::cyber\-::examples\-::proto\-::\-Driver;
+
+int main(int argc, char$\ast$ argv\mbox{[}$\,$\mbox{]}) \{ apollo\-::cyber\-::\-Init(argv\mbox{[}0\mbox{]}); std\-::shared\-\_\-ptr$<$apollo\-::cyber\-::\-Node$>$ node( \hyperlink{namespaceapollo_1_1cyber_ae369c5de0279f2a5745d0438d532bc89}{apollo\-::cyber\-::\-Create\-Node}(\char`\"{}start\-\_\-node\char`\"{})); auto server = node-\/$>$Create\-Service$<$\-Driver, Driver$>$( \char`\"{}test\-\_\-server\char`\"{}, \mbox{[}\mbox{]}(const std\-::shared\-\_\-ptr$<$\-Driver$>$\& request, std\-::shared\-\_\-ptr$<$\-Driver$>$\& response) \{ A\-I\-N\-F\-O $<$$<$ \char`\"{}server\-: I am driver server\char`\"{}; static uint64\-\_\-t id = 0; ++id; response-\/$>$set\-\_\-msg\-\_\-id(id); response-\/$>$set\-\_\-timestamp(0); \}); auto client = node-\/$>$Create\-Client$<$\-Driver, Driver$>$(\char`\"{}test\-\_\-server\char`\"{}); auto driver\-\_\-msg = std\-::make\-\_\-shared$<$\-Driver$>$(); driver\-\_\-msg-\/$>$set\-\_\-msg\-\_\-id(0); driver\-\_\-msg-\/$>$set\-\_\-timestamp(0); while (\hyperlink{namespaceapollo_1_1cyber_aafa5f9962b51918897897bbc0fdd802f}{apollo\-::cyber\-::\-O\-K()}) \{ auto res = client-\/$>$Send\-Request(driver\-\_\-msg); if (res != nullptr) \{ A\-I\-N\-F\-O $<$$<$ \char`\"{}client\-: responese\-: \char`\"{} $<$$<$ res-\/$>$Short\-Debug\-String(); \} else \{ A\-I\-N\-F\-O $<$$<$ \char`\"{}client\-: service may not ready.\char`\"{}; \} sleep(1); \}
+
+\hyperlink{namespaceapollo_1_1cyber_a7929114e78a9c595b0ee715968ca2712}{apollo\-::cyber\-::\-Wait\-For\-Shutdown()}; return 0; \} ``` \paragraph*{Bazel build file}
+
+```bazel cc\-\_\-binary( name = \char`\"{}service\char`\"{}, srcs = \mbox{[} \char`\"{}service.\-cc\char`\"{}, \mbox{]}, deps = \mbox{[} \char`\"{}//cyber\char`\"{}, \char`\"{}//cyber/examples/proto\-:examples\-\_\-cc\-\_\-proto\char`\"{}, \mbox{]}, ) ```
+
+\paragraph*{Build and run}
+
+
+\begin{DoxyItemize}
+\item Build service/client\-: bazel build cyber/examples/…
+\item Run\-: ./bazel-\/bin/cyber/examples/service
+\item Examining result\-: you should see content below in apollo/data/log/service.\-I\-N\-F\-O
+\end{DoxyItemize}
+
+``` I1124 16\-:36\-:44.\-568845 14965 service.\-cc\-:30\mbox{]} \mbox{[}service\mbox{]} server\-: i am driver server I1124 16\-:36\-:44.\-569031 14949 service.\-cc\-:43\mbox{]} \mbox{[}service\mbox{]} client\-: responese\-: msg\-\_\-id\-: 1 timestamp\-: 0 I1124 16\-:36\-:45.\-569514 14966 service.\-cc\-:30\mbox{]} \mbox{[}service\mbox{]} server\-: i am driver server I1124 16\-:36\-:45.\-569932 14949 service.\-cc\-:43\mbox{]} \mbox{[}service\mbox{]} client\-: responese\-: msg\-\_\-id\-: 2 timestamp\-: 0 I1124 16\-:36\-:46.\-570627 14967 service.\-cc\-:30\mbox{]} \mbox{[}service\mbox{]} server\-: i am driver server I1124 16\-:36\-:46.\-571024 14949 service.\-cc\-:43\mbox{]} \mbox{[}service\mbox{]} client\-: responese\-: msg\-\_\-id\-: 3 timestamp\-: 0 I1124 16\-:36\-:47.\-571566 14968 service.\-cc\-:30\mbox{]} \mbox{[}service\mbox{]} server\-: i am driver server I1124 16\-:36\-:47.\-571962 14949 service.\-cc\-:43\mbox{]} \mbox{[}service\mbox{]} client\-: responese\-: msg\-\_\-id\-: 4 timestamp\-: 0 I1124 16\-:36\-:48.\-572634 14969 service.\-cc\-:30\mbox{]} \mbox{[}service\mbox{]} server\-: i am driver server I1124 16\-:36\-:48.\-573030 14949 service.\-cc\-:43\mbox{]} \mbox{[}service\mbox{]} client\-: responese\-: msg\-\_\-id\-: 5 timestamp\-: 0 ```
+
+\subsubsection*{Precautions}
+
+
+\begin{DoxyItemize}
+\item When registering a service, note that duplicate service names are not allowed
+\item The node name applied when registering the server and client should not be duplicated either
+\end{DoxyItemize}
+
+\subsection*{Parameter Service}
+
+The Parameter Service is used for shared data between nodes, and provides basic operations such as {\ttfamily set}, {\ttfamily get}, and {\ttfamily list}. The Parameter Service is based on the {\ttfamily Service} implementation and contains service and client.
+
+\subsubsection*{Parameter Object}
+
+\paragraph*{Supported Data types}
+
+All parameters passed through cyber are {\ttfamily \hyperlink{classapollo_1_1cyber_1_1Parameter}{apollo\-::cyber\-::\-Parameter}} objects, the table below lists the 5 supported parameter types.
+
+\begin{TabularC}{3}
+\hline
+\rowcolor{lightgray}{\bf Parameter type }&{\bf C++ data type }&{\bf protobuf data type  }\\\cline{1-3}
+apollo\-::cyber\-::proto\-::\-Param\-Type\-::\-I\-N\-T &int64\-\_\-t &int64 \\\cline{1-3}
+apollo\-::cyber\-::proto\-::\-Param\-Type\-::\-D\-O\-U\-B\-L\-E &double &double \\\cline{1-3}
+apollo\-::cyber\-::proto\-::\-Param\-Type\-::\-B\-O\-O\-L &bool &bool \\\cline{1-3}
+apollo\-::cyber\-::proto\-::\-Param\-Type\-::\-S\-T\-R\-I\-N\-G &std\-::string &string \\\cline{1-3}
+apollo\-::cyber\-::proto\-::\-Param\-Type\-::\-P\-R\-O\-T\-O\-B\-U\-F &std\-::string &string \\\cline{1-3}
+apollo\-::cyber\-::proto\-::\-Param\-Type\-::\-N\-O\-T\-\_\-\-S\-E\-T &-\/ &-\/ \\\cline{1-3}
+\end{TabularC}
+
+
+Besides the 5 types above, Parameter also supports interface with protobuf object as incoming parameter. Post performing serialization processes the object and converts it to the S\-T\-R\-I\-N\-G type for transfer.
+
+\paragraph*{Creating the Parameter Object}
+
+Supported constructors\-:
+
+```\-C Parameter(); // Name is empty, type is N\-O\-T\-\_\-\-S\-E\-T explicit Parameter(const Parameter\& parameter); explicit Parameter(const std\-::string\& name); // type为\-N\-O\-T\-\_\-\-S\-E\-T Parameter(const std\-::string\& name, const bool bool\-\_\-value); Parameter(const std\-::string\& name, const int int\-\_\-value); Parameter(const std\-::string\& name, const int64\-\_\-t int\-\_\-value); Parameter(const std\-::string\& name, const float double\-\_\-value); Parameter(const std\-::string\& name, const double double\-\_\-value); Parameter(const std\-::string\& name, const std\-::string\& string\-\_\-value); Parameter(const std\-::string\& name, const char$\ast$ string\-\_\-value); Parameter(const std\-::string\& name, const std\-::string\& msg\-\_\-str, const std\-::string\& full\-\_\-name, const std\-::string\& proto\-\_\-desc); Parameter(const std\-::string\& name, const google\-::protobuf\-::\-Message\& msg); ``` Sample code of using Parameter object\-:
+
+```\-C Parameter a(\char`\"{}int\char`\"{}, 10); Parameter b(\char`\"{}bool\char`\"{}, true); Parameter c(\char`\"{}double\char`\"{}, 0.\-1); Parameter d(\char`\"{}string\char`\"{}, \char`\"{}cyber\char`\"{}); Parameter e(\char`\"{}string\char`\"{}, std\-::string(\char`\"{}cyber\char`\"{})); // proto message Chatter Chatter chatter; Parameter f(\char`\"{}chatter\char`\"{}, chatter); std\-::string msg\-\_\-str(\char`\"{}\char`\"{}); chatter.\-Serialize\-To\-String(\&msg\-\_\-str); std\-::string msg\-\_\-desc(\char`\"{}\char`\"{}); Protobuf\-Factory\-::\-Get\-Descriptor\-String(chatter, \&msg\-\_\-desc); Parameter g(\char`\"{}chatter\char`\"{}, msg\-\_\-str, Chatter\-::descriptor()-\/$>$full\-\_\-name(), msg\-\_\-desc); ```
+
+\paragraph*{Interface and Data Reading}
+
+Interface list\-:
+
+```\-C inline Param\-Type type() const; inline std\-::string Type\-Name() const; inline std\-::string Descriptor() const; inline const std\-::string Name() const; inline bool As\-Bool() const; inline int64\-\_\-t As\-Int64() const; inline double As\-Double() const; inline const std\-::string As\-String() const; std\-::string Debug\-String() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-base\-\_\-of$<$google\-::protobuf\-::\-Message, Type$>$\-::value, Type$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-integral$<$\-Type$>$\-::value \&\& !std\-::is\-\_\-same$<$\-Type, bool$>$\-::value, Type$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-floating\-\_\-point$<$\-Type$>$\-::value, Type$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-convertible$<$\-Type, std\-::string$>$\-::value, const std\-::string\&$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-same$<$\-Type, bool$>$\-::value, bool$>$\-::type value() const; ```
+
+An example of how to use those interfaces\-:
+
+```\-C Parameter a(\char`\"{}int\char`\"{}, 10); a.\-Name(); // return int a.\-Type(); // return apollo\-::cyber\-::proto\-::\-Param\-Type\-::\-I\-N\-T a.\-Type\-Name(); // return string\-: I\-N\-T a.\-Debug\-String(); // return string\-: \{name\-: \char`\"{}int\char`\"{}, type\-: \char`\"{}\-I\-N\-T\char`\"{}, value\-: 10\} int x = a.\-As\-Int64(); // x = 10 x = \hyperlink{namespaceapollo_1_1cyber_1_1base_aa3e2fff9b18a1214af4a70546fb7120f}{a.\-value$<$int64\-\_\-t$>$()}; // x = 10 x = a.\-As\-String(); // Undefined behavior, error log prompt f.\-Type\-Name(); // return string\-: chatter auto chatter = \hyperlink{namespaceapollo_1_1cyber_1_1base_aa3e2fff9b18a1214af4a70546fb7120f}{f.\-value$<$\-Chatter$>$()}; ```
+
+\subsubsection*{Parameter Service}
+
+If a node wants to provide a Parameter Service to other nodes, then you need to create a {\ttfamily Parameter\-Service}.
+
+```\-C /$\ast$$\ast$
+\begin{DoxyItemize}
+\item $\ast$
+\item 
+\begin{DoxyParams}{Parameters}
+{\em node} & shared\-\_\-ptr of the node handler\\
+\hline
+\end{DoxyParams}
+explicit Parameter\-Service(const std\-::shared\-\_\-ptr$<$\-Node$>$\& node); ```
+\end{DoxyItemize}
+
+Since all parameters are stored in the parameter service object, the parameters can be manipulated directly in the Parameter\-Service without sending a service request.
+
+{\bfseries Setting parameters\-:}
+
+```\-C /$\ast$$\ast$
+\begin{DoxyItemize}
+\item Set the Parameter object
+\item 
+\item 
+\begin{DoxyParams}{Parameters}
+{\em parameter} & parameter to be set\\
+\hline
+\end{DoxyParams}
+void Set\-Parameter(const Parameter\& parameter); ``` {\bfseries Getting parameters\-:}
+\end{DoxyItemize}
+
+```\-C /$\ast$$\ast$
+\begin{DoxyItemize}
+\item Get the Parameter object
+\item 
+\item 
+\begin{DoxyParams}{Parameters}
+{\em param\-\_\-name} & \\
+\hline
+\end{DoxyParams}
+
+\item 
+\begin{DoxyParams}{Parameters}
+{\em parameter} & the pointer to store\\
+\hline
+\end{DoxyParams}
+
+\item \begin{DoxyReturn}{Returns}
+true
+\end{DoxyReturn}
+
+\item \begin{DoxyReturn}{Returns}
+false call service fail or timeout
+\end{DoxyReturn}
+bool Get\-Parameter(const std\-::string\& param\-\_\-name, Parameter$\ast$ parameter); ```
+\end{DoxyItemize}
+
+{\bfseries Getting the list of parameters\-:}
+
+```\-C /$\ast$$\ast$
+\begin{DoxyItemize}
+\item Get all the Parameter objects
+\item 
+\item 
+\begin{DoxyParams}{Parameters}
+{\em parameters} & pointer of vector to store all the parameters\\
+\hline
+\end{DoxyParams}
+
+\item \begin{DoxyReturn}{Returns}
+true
+\end{DoxyReturn}
+
+\item \begin{DoxyReturn}{Returns}
+false call service fail or timeout
+\end{DoxyReturn}
+bool List\-Parameters(std\-::vector$<$\-Parameter$>$$\ast$ parameters); ```
+\end{DoxyItemize}
+
+\subsubsection*{Parameter Client}
+
+If a node wants to use parameter services of other nodes, you need to create a {\ttfamily Parameter\-Client}.
+
+```\-C /$\ast$$\ast$
+\begin{DoxyItemize}
+\item Construct a new Parameter\-Client object
+\item 
+\item 
+\begin{DoxyParams}{Parameters}
+{\em node} & shared\-\_\-ptr of the node handler\\
+\hline
+\end{DoxyParams}
+
+\item 
+\begin{DoxyParams}{Parameters}
+{\em service\-\_\-node\-\_\-name} & node name which provide a param services\\
+\hline
+\end{DoxyParams}
+Parameter\-Client(const std\-::shared\-\_\-ptr$<$\-Node$>$\& node, const std\-::string\& service\-\_\-node\-\_\-name); ```
+\end{DoxyItemize}
+
+You could also perform {\ttfamily Set\-Parameter}, {\ttfamily Get\-Parameter} and {\ttfamily List\-Parameters} mentioned under \href{#Parameter-Service}{\tt Parameter Service}.
+
+\subsubsection*{Demo -\/ example}
+
+```\-C \#include \char`\"{}cyber/cyber.\-h\char`\"{} \#include \char`\"{}cyber/parameter/parameter\-\_\-client.\-h\char`\"{} \#include \char`\"{}cyber/parameter/parameter\-\_\-server.\-h\char`\"{}
+
+using \hyperlink{classapollo_1_1cyber_1_1Parameter}{apollo\-::cyber\-::\-Parameter}; using \hyperlink{classapollo_1_1cyber_1_1ParameterServer}{apollo\-::cyber\-::\-Parameter\-Server}; using \hyperlink{classapollo_1_1cyber_1_1ParameterClient}{apollo\-::cyber\-::\-Parameter\-Client};
+
+int main(int argc, char$\ast$$\ast$ argv) \{ apollo\-::cyber\-::\-Init($\ast$argv); std\-::shared\-\_\-ptr$<$apollo\-::cyber\-::\-Node$>$ node = \hyperlink{namespaceapollo_1_1cyber_ae369c5de0279f2a5745d0438d532bc89}{apollo\-::cyber\-::\-Create\-Node}(\char`\"{}parameter\char`\"{}); auto param\-\_\-server = std\-::make\-\_\-shared$<$\-Parameter\-Server$>$(node); auto param\-\_\-client = std\-::make\-\_\-shared$<$\-Parameter\-Client$>$(node, \char`\"{}parameter\char`\"{}); param\-\_\-server-\/$>$Set\-Parameter(Parameter(\char`\"{}int\char`\"{}, 1)); Parameter parameter; param\-\_\-server-\/$>$Get\-Parameter(\char`\"{}int\char`\"{}, \&parameter); A\-I\-N\-F\-O $<$$<$ \char`\"{}int\-: \char`\"{} $<$$<$ parameter.\-As\-Int64(); param\-\_\-client-\/$>$Set\-Parameter(Parameter(\char`\"{}string\char`\"{}, \char`\"{}test\char`\"{})); param\-\_\-client-\/$>$Get\-Parameter(\char`\"{}string\char`\"{}, \&parameter); A\-I\-N\-F\-O $<$$<$ \char`\"{}string\-: \char`\"{} $<$$<$ parameter.\-As\-String(); param\-\_\-client-\/$>$Get\-Parameter(\char`\"{}int\char`\"{}, \&parameter); A\-I\-N\-F\-O $<$$<$ \char`\"{}int\-: \char`\"{} $<$$<$ parameter.\-As\-Int64(); return 0; \} ``` \paragraph*{Build and run}
+
+
+\begin{DoxyItemize}
+\item Build\-: bazel build cyber/examples/…
+\item Run\-: ./bazel-\/bin/cyber/examples/paramserver
+\end{DoxyItemize}
+
+\subsection*{Log A\-P\-I}
+
+\subsubsection*{Log library}
+
+Cyber log library is built on top of glog. The following header files need to be included\-:
+
+```\-C \#include \char`\"{}cyber/common/log.\-h\char`\"{} \#include \char`\"{}cyber/init.\-h\char`\"{} ```
+
+\subsubsection*{Log configuration}
+
+Default global config path\-: cyber/setup.\-bash
+
+The configs below could be modified by devloper\-:
+
+``` export G\-L\-O\-G\-\_\-log\-\_\-dir=/apollo/data/log export G\-L\-O\-G\-\_\-alsologtostderr=0 export G\-L\-O\-G\-\_\-colorlogtostderr=1 export G\-L\-O\-G\-\_\-minloglevel=0 ```
+
+\subsubsection*{Log initialization}
+
+Call the Init method at the code entry to initialize the log\-:
+
+```c++ apollo\-::cyber\-::cyber\-::\-Init(argv\mbox{[}0\mbox{]}) is initialized. If no macro definition is made in the previous component, the corresponding log is printed to the binary log. ```
+
+\subsubsection*{Log output macro}
+
+Log library is encapsulated in Log printing macros. The related log macros are used as follows\-:
+
+```\-C A\-D\-E\-B\-U\-G $<$$<$ \char`\"{}hello cyber.\char`\"{}; A\-I\-N\-F\-O $<$$<$ \char`\"{}hello cyber.\char`\"{}; A\-W\-A\-R\-N $<$$<$ \char`\"{}hello cyber.\char`\"{}; A\-E\-R\-R\-O\-R $<$$<$ \char`\"{}hello cyber.\char`\"{}; A\-F\-A\-T\-A\-L $<$$<$ \char`\"{}hello cyber.\char`\"{};
+
+```
+
+\subsubsection*{Log format}
+
+The format is {\ttfamily $<$M\-O\-D\-U\-L\-E\-\_\-\-N\-A\-M\-E$>$.log.$<$L\-O\-G\-\_\-\-L\-E\-V\-E\-L$>$.$<$datetime$>$.$<$process\-\_\-id$>$}
+
+\subsubsection*{About log files}
+
+Currently, the only different output behavior from default glog is that different log levels of a module will be written into the same log file.
+
+\subsection*{Building a module based on Component}
+
+\subsubsection*{Key concepts}
+
+\paragraph*{1. Component}
+
+The component is the base class that Cyber-\/\-R\-T provides to build application modules. Each specific application module can inherit the Component class and define its own {\ttfamily Init} and {\ttfamily Proc} functions so that it can be loaded into the Cyber framework.
+
+\paragraph*{2. Binary vs Component}
+
+There are two options to use Cyber-\/\-R\-T framework for applications\-:
+
+
+\begin{DoxyItemize}
+\item Binary based\-: the application is compiled separately into a binary, which communicates with other cyber modules by creating its own {\ttfamily Reader} and {\ttfamily Writer}.
+\item Component based\-: the application is compiled into a Shared Library. By inheriting the Component class and writing the corresponding dag description file, the Cyber-\/\-R\-T framework will load and run the application dynamically.
+\end{DoxyItemize}
+
+\subparagraph*{The essential Component interface}
+
+
+\begin{DoxyItemize}
+\item The component's {\ttfamily \hyperlink{namespaceapollo_1_1cyber_a2d055a81b338116634deaf8ac3367aca}{Init()}} function is like the main function that does some initialization of the algorithm.
+\item Component's {\ttfamily Proc()} function works like Reader's callback function that is called by the framework when a message arrives.
+\end{DoxyItemize}
+
+\subparagraph*{Advantages of using Component}
+
+
+\begin{DoxyItemize}
+\item Component can be loaded into different processes through the launch file, and the deployment is flexible.
+\item Component can change the received channel name by modifying the dag file without recompiling.
+\item Component supports receiving multiple types of data.
+\item Component supports providing multiple fusion strategies.
+\end{DoxyItemize}
+
+\paragraph*{3. Dag file format}
+
+An example dag file\-:
+
+``` \section*{Define all coms in D\-A\-G streaming.}
+
+module\-\_\-config \{ module\-\_\-library \-: \char`\"{}lib/libperception\-\_\-component.\-so\char`\"{} components \{ class\-\_\-name \-: \char`\"{}\-Perception\-Component\char`\"{} config \{ name \-: \char`\"{}perception\char`\"{} readers \{ channel\-: \char`\"{}perception/channel\-\_\-name\char`\"{} \} \} \} timer\-\_\-components \{ class\-\_\-name \-: \char`\"{}\-Driver\-Component\char`\"{} config \{ name \-: \char`\"{}driver\char`\"{} interval \-: 100 \} \} \} ``{\ttfamily 
+\begin{DoxyItemize}
+\item $\ast$$\ast$module\-\_\-library$\ast$$\ast$\-: If you want to load the .so library the root directory is the working directory of cyber (the same directory ofsetup.\-bash`)
+\item {\bfseries components \& timer\-\_\-component}\-: Select the base component class type that needs to be loaded.
+\item {\bfseries class\-\_\-name}\-: the name of the component class to load
+\item {\bfseries name}\-: the loaded class\-\_\-name as the identifier of the loading example
+\item {\bfseries readers}\-: Data received by the current component, supporting 1-\/3 channels of data.
+\end{DoxyItemize}}
+
+{\ttfamily \subsubsection*{Demo -\/ examples}}
+
+{\ttfamily }
+
+{\ttfamily \paragraph*{Common\-\_\-component\-\_\-example(cyber/examples/common\-\_\-component\-\_\-example/$\ast$)}}
+
+{\ttfamily  Header definition(\hyperlink{common__component__example_8h}{common\-\_\-component\-\_\-example.\-h})}
+
+{\ttfamily ```\-C \#include $<$memory$>$}
+
+{\ttfamily \#include \char`\"{}cyber/class\-\_\-loader/class\-\_\-loader.\-h\char`\"{} \#include \char`\"{}cyber/component/component.\-h\char`\"{} \#include \char`\"{}cyber/examples/proto/examples.\-pb.\-h\char`\"{}}
+
+{\ttfamily using apollo\-::cyber\-::examples\-::proto\-::\-Driver; using \hyperlink{classapollo_1_1cyber_1_1Component}{apollo\-::cyber\-::\-Component}; using \hyperlink{classapollo_1_1cyber_1_1ComponentBase}{apollo\-::cyber\-::\-Component\-Base};}
+
+{\ttfamily class Commontestcomponent \-: public \hyperlink{classapollo_1_1cyber_1_1Component}{Component$<$\-Driver, Driver$>$} \{ public\-: bool \hyperlink{namespaceapollo_1_1cyber_a2d055a81b338116634deaf8ac3367aca}{Init()} override; bool Proc(const std\-::shared\-\_\-ptr$<$\-Driver$>$\& msg0, const std\-::shared\-\_\-ptr$<$\-Driver$>$\& msg1) override; \}; \hyperlink{component_8h_a031103527dc7f59a627459d635de10f8}{C\-Y\-B\-E\-R\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-C\-O\-M\-P\-O\-N\-E\-N\-T(\-Commontestcomponent)} ```}
+
+{\ttfamily Cpp file implementation(common\-\_\-component\-\_\-example.\-cc)}
+
+{\ttfamily ```\-C \#include \char`\"{}cyber/examples/common\-\_\-component\-\_\-smaple/common\-\_\-component\-\_\-example.\-h\char`\"{}}
+
+{\ttfamily \#include \char`\"{}cyber/class\-\_\-loader/class\-\_\-loader.\-h\char`\"{} \#include \char`\"{}cyber/component/component.\-h\char`\"{}}
+
+{\ttfamily bool \hyperlink{namespaceapollo_1_1cyber_a2d055a81b338116634deaf8ac3367aca}{Commontestcomponent\-::\-Init()} \{ A\-I\-N\-F\-O $<$$<$ \char`\"{}\-Commontest component init\char`\"{}; return true; \}}
+
+{\ttfamily bool Commontestcomponent\-::\-Proc(const std\-::shared\-\_\-ptr$<$\-Driver$>$\& msg0, const std\-::shared\-\_\-ptr$<$\-Driver$>$\& msg1) \{ A\-I\-N\-F\-O $<$$<$ \char`\"{}\-Start commontest component Proc \mbox{[}\char`\"{} $<$$<$ msg0-\/$>$msg\-\_\-id() $<$$<$ \char`\"{}\mbox{]} \mbox{[}\char`\"{} $<$$<$ msg1-\/$>$msg\-\_\-id() $<$$<$ \char`\"{}\mbox{]}\char`\"{}; return true; \} ```}
+
+{\ttfamily \paragraph*{Timer\-\_\-component\-\_\-example(cyber/examples/timer\-\_\-component\-\_\-example/$\ast$)}}
+
+{\ttfamily }
+
+{\ttfamily Header definition(\hyperlink{timer__component__example_8h}{timer\-\_\-component\-\_\-example.\-h})}
+
+{\ttfamily ```\-C \#include $<$memory$>$}
+
+{\ttfamily \#include \char`\"{}cyber/class\-\_\-loader/class\-\_\-loader.\-h\char`\"{} \#include \char`\"{}cyber/component/component.\-h\char`\"{} \#include \char`\"{}cyber/component/timer\-\_\-component.\-h\char`\"{} \#include \char`\"{}cyber/examples/proto/examples.\-pb.\-h\char`\"{}}
+
+{\ttfamily using apollo\-::cyber\-::examples\-::proto\-::\-Driver; using \hyperlink{classapollo_1_1cyber_1_1Component}{apollo\-::cyber\-::\-Component}; using \hyperlink{classapollo_1_1cyber_1_1ComponentBase}{apollo\-::cyber\-::\-Component\-Base}; using \hyperlink{classapollo_1_1cyber_1_1TimerComponent}{apollo\-::cyber\-::\-Timer\-Component}; using \hyperlink{classapollo_1_1cyber_1_1Writer}{apollo\-::cyber\-::\-Writer};}
+
+{\ttfamily class Timertest\-Component \-: public Timer\-Component \{ public\-: bool \hyperlink{namespaceapollo_1_1cyber_a2d055a81b338116634deaf8ac3367aca}{Init()} override; bool Proc() override;}
+
+{\ttfamily  private\-: std\-::shared\-\_\-ptr$<$Writer$<$\-Driver$>$$>$ driver\-\_\-writer\-\_\- = nullptr; \}; \hyperlink{component_8h_a031103527dc7f59a627459d635de10f8}{C\-Y\-B\-E\-R\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-C\-O\-M\-P\-O\-N\-E\-N\-T(\-Timertest\-Component)} ``` Cpp file implementation(timer\-\_\-component\-\_\-example.\-cc)}
+
+{\ttfamily ```\-C \#include \char`\"{}cyber/examples/timer\-\_\-component\-\_\-example/timer\-\_\-component\-\_\-example.\-h\char`\"{}}
+
+{\ttfamily \#include \char`\"{}cyber/class\-\_\-loader/class\-\_\-loader.\-h\char`\"{} \#include \char`\"{}cyber/component/component.\-h\char`\"{} \#include \char`\"{}cyber/examples/proto/examples.\-pb.\-h\char`\"{}}
+
+{\ttfamily bool \hyperlink{namespaceapollo_1_1cyber_a2d055a81b338116634deaf8ac3367aca}{Timertest\-Component\-::\-Init()} \{ driver\-\_\-writer\-\_\- = node\-\_\--\/$>$Create\-Writer$<$\-Driver$>$(\char`\"{}/carstatus/channel\char`\"{}); return true; \}}
+
+{\ttfamily bool Timertest\-Component\-::\-Proc() \{ static int i = 0; auto out\-\_\-msg = std\-::make\-\_\-shared$<$\-Driver$>$(); out\-\_\-msg-\/$>$set\-\_\-msg\-\_\-id(i++); driver\-\_\-writer\-\_\--\/$>$Write(out\-\_\-msg); A\-I\-N\-F\-O $<$$<$ \char`\"{}timertestcomponent\-: Write drivermsg-\/$>$\char`\"{} $<$$<$ out\-\_\-msg-\/$>$Short\-Debug\-String(); return true; \} ``` \paragraph*{Build and run}}
+
+{\ttfamily  Use timertestcomponent as example\-:}
+
+{\ttfamily 
+\begin{DoxyItemize}
+\item Build\-: bazel build cyber/examples/timer\-\_\-component\-\_\-smaple/…
+\item Run\-: mainboard -\/d cyber/examples/timer\-\_\-component\-\_\-smaple/timer.\-dag
+\end{DoxyItemize}}
+
+{\ttfamily \subsubsection*{Precautions}}
+
+{\ttfamily }
+
+{\ttfamily 
+\begin{DoxyItemize}
+\item Component needs to be registered to load the class through Shared\-Library. The registration interface looks like\-:
+\end{DoxyItemize}}
+
+{\ttfamily ```\-C C\-Y\-B\-E\-R\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-\_\-\-C\-L\-A\-S\-S(\-Driver\-Component) ```}
+
+{\ttfamily If you use a namespace when registering, you also need to add a namespace when you define it in the dag file.}
+
+{\ttfamily 
+\begin{DoxyItemize}
+\item The configuration files of the Component and Timer\-Component are different, please be careful not to mix the two up.
+\end{DoxyItemize}}
+
+{\ttfamily \subsection*{Launch}}
+
+{\ttfamily }
+
+{\ttfamily {\bfseries cyber\-\_\-launch} is the launcher of the Cyber-\/\-R\-T framework. It starts multiple mainboards according to the launch file, and loads different components into different mainboards according to the dag file. cyber\-\_\-launch supports two scenarios for dynamically loading components or starting Binary programs in a child process.}
+
+{\ttfamily \subsubsection*{Launch File Format}}
+
+{\ttfamily }
+
+{\ttfamily ``` $<$cyber$>$ $<$module$>$ $<$name$>$driver$<$/name$>$ $<$dag\-\_\-conf$>$driver.\-dag$<$/dag\-\_\-conf$>$ $<$process\-\_\-name$>$$<$/process\-\_\-name$>$ $<$exception\-\_\-handler$>$exit$<$/exception\-\_\-handler$>$ $<$/module$>$ $<$module$>$ $<$name$>$perception$<$/name$>$ $<$dag\-\_\-conf$>$perception.\-dag$<$/dag\-\_\-conf$>$ $<$process\-\_\-name$>$$<$/process\-\_\-name$>$ $<$exception\-\_\-handler$>$respawn$<$/exception\-\_\-handler$>$ $<$/module$>$ $<$module$>$ $<$name$>$planning$<$/name$>$ $<$dag\-\_\-conf$>$planning.\-dag$<$/dag\-\_\-conf$>$ $<$process\-\_\-name$>$$<$/process\-\_\-name$>$ $<$/module$>$ $<$/cyber$>$ ```}
+
+{\ttfamily {\bfseries Module}\-: Each loaded component or binary is a module}
+
+{\ttfamily 
+\begin{DoxyItemize}
+\item {\bfseries name} is the loaded module name
+\item {\bfseries dag\-\_\-conf} is the name of the corresponding dag file of the component
+\item {\bfseries process\-\_\-name} is the name of the mainboard process once started, and the same component of process\-\_\-name will be loaded and run in the same process.
+\item {\bfseries exception\-\_\-handler} is the handler method when the exception occurs in the process. The value can be exit or respawn listed below.
+\begin{DoxyItemize}
+\item exit, which means that the entire process needs to stop running when the current process exits abnormally.
+\item respawn, the current process needs to be restarted after abnormal exit. Start this process. If there is no such thing as it is empty, it means no treatment. Can be controlled by the user according to the specific conditions of the process
+\end{DoxyItemize}
+\end{DoxyItemize}}
+
+{\ttfamily \subsection*{Timer}}
+
+{\ttfamily }
+
+{\ttfamily Timer can be used to create a timed task to run on a periodic basis, or to run only once}
+
+{\ttfamily \subsubsection*{Timer Interface}}
+
+{\ttfamily  ```\-C /$\ast$$\ast$
+\begin{DoxyItemize}
+\item Construct a new Timer object
+\item 
+\item 
+\begin{DoxyParams}{Parameters}
+{\em period} & The period of the timer, unit is ms\\
+\hline
+\end{DoxyParams}
+
+\item 
+\begin{DoxyParams}{Parameters}
+{\em callback} & The tasks that the timer needs to perform\\
+\hline
+\end{DoxyParams}
+
+\item 
+\begin{DoxyParams}{Parameters}
+{\em oneshot} & True\-: perform the callback only after the first timing cycle\\
+\hline
+\end{DoxyParams}
+
+\item False\-: perform the callback every timed period
+\end{DoxyItemize}}
+
+{\ttfamily  Timer(uint32\-\_\-t period, std\-::function$<$void()$>$ callback, bool oneshot); ```}
+
+{\ttfamily Or you could encapsulate the parameters into a timer option as follows\-:}
+
+{\ttfamily ```\-C struct Timer\-Option \{ uint32\-\_\-t period; // The period of the timer, unit is ms std\-::function$<$void()$>$ callback; // The tasks that the timer needs to perform bool oneshot; // True\-: perform the callback only after the first timing cycle // False\-: perform the callback every timed period \}; /$\ast$$\ast$
+\begin{DoxyItemize}
+\item Construct a new Timer object
+\item 
+\item 
+\begin{DoxyParams}{Parameters}
+{\em opt} & Timer option\\
+\hline
+\end{DoxyParams}
+explicit Timer(\-Timer\-Option opt); ```
+\end{DoxyItemize}}
+
+{\ttfamily \subsubsection*{Start Timer}}
+
+{\ttfamily }
+
+{\ttfamily After creating a Timer instance, you must call {\ttfamily Timer\-::\-Start()} to start the timer.}
+
+{\ttfamily \subsubsection*{Stop Timer}}
+
+{\ttfamily }
+
+{\ttfamily When you need to manually stop a timer that has already started, you can call the {\ttfamily Timer\-::\-Stop()} interface.}
+
+{\ttfamily \subsubsection*{Demo -\/ example}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C \#include $<$iostream$>$ \#include \char`\"{}cyber/cyber.\-h\char`\"{} int main(int argc, char$\ast$$\ast$ argv) \{ cyber\-::\-Init(argv\mbox{[}0\mbox{]}); // Print current time every 100ms cyber\-::\-Timer timer(100, \mbox{[}\mbox{]}()\{ std\-::cout $<$$<$ cyber\-::\-Time\-::\-Now() $<$$<$ std\-::endl; \}, false); timer.\-Start() sleep(1); timer.\-Stop(); \} ```}
+
+{\ttfamily \subsection*{Time A\-P\-I}}
+
+{\ttfamily }
+
+{\ttfamily Time is a class used to manage time; it can be used for current time acquisition, time-\/consuming calculation, time conversion, and so on.}
+
+{\ttfamily The time interfaces are as follows\-:}
+
+{\ttfamily ```\-C // constructor, passing in a different value to construct Time Time(uint64\-\_\-t nanoseconds); //uint64\-\_\-t, in nanoseconds Time(int nanoseconds); // int type, unit\-: nanoseconds Time(double seconds); // double, in seconds Time(uint32\-\_\-t seconds, uint32\-\_\-t nanoseconds); // seconds seconds + nanoseconds nanoseconds Static Time Now(); // Get the current time Double To\-Second() const; // convert to seconds Uint64\-\_\-t To\-Nanosecond() const; // Convert to nanoseconds Std\-::string To\-String() const; // Convert to a string in the format \char`\"{}2018-\/07-\/10 20\-:21\-:51.\-123456789\char`\"{} Bool Is\-Zero() const; // Determine if the time is 0}
+
+{\ttfamily ```}
+
+{\ttfamily A code example can be seen below\-:}
+
+{\ttfamily ```\-C \#include $<$iostream$>$ \#include \char`\"{}cyber/cyber.\-h\char`\"{} \#include \char`\"{}cyber/duration.\-h\char`\"{} int main(int argc, char$\ast$$\ast$ argv) \{ cyber\-::\-Init(argv\mbox{[}0\mbox{]}); Time t1(1531225311123456789\-U\-L); std\-::cout $<$$<$ t1.\-To\-String() std\-::endl; // 2018-\/07-\/10 20\-:21\-:51.\-123456789 // Duration time interval Time t1(100); Duration d(200); Time t2(300); assert(d == (t1-\/t2)); // true \}}
+
+{\ttfamily ```}
+
+{\ttfamily \subsection*{Record file\-: Read and Write}}
+
+{\ttfamily }
+
+{\ttfamily \subsubsection*{Reading the Reader file}}
+
+{\ttfamily }
+
+{\ttfamily {\bfseries Record\-Reader} is the component used to read messages in the cyber framework. Each Record\-Reader can open an existing record file through the {\ttfamily Open} method, and the thread will asynchronously read the information in the record file. The user only needs to execute Read\-Message to extract the latest message in Record\-Reader, and then get the message information through Get\-Current\-Message\-Channel\-Name, Get\-Current\-Raw\-Message, Get\-Current\-Message\-Time.}
+
+{\ttfamily {\bfseries Record\-Writer} is the component used to record messages in the cyber framework. Each Record\-Writer can create a new record file through the Open method. The user only needs to execute Write\-Message and Write\-Channel to write message and channel information, and the writing process is asynchronous.}
+
+{\ttfamily \subsubsection*{Demo -\/ example(cyber/examples/record.\-cc)}}
+
+{\ttfamily  Write 100 Raw\-Message to{\ttfamily T\-E\-S\-T\-\_\-\-F\-I\-L\-E} through {\ttfamily test\-\_\-write} method, then read them out through {\ttfamily test\-\_\-read} method.}
+
+{\ttfamily ```c \#include $<$string$>$}
+
+{\ttfamily \#include \char`\"{}cyber/cyber.\-h\char`\"{} \#include \char`\"{}cyber/message/raw\-\_\-message.\-h\char`\"{} \#include \char`\"{}cyber/proto/record.\-pb.\-h\char`\"{} \#include \char`\"{}cyber/record/record\-\_\-message.\-h\char`\"{} \#include \char`\"{}cyber/record/record\-\_\-reader.\-h\char`\"{} \#include \char`\"{}cyber/record/record\-\_\-writer.\-h\char`\"{}}
+
+{\ttfamily using \hyperlink{classapollo_1_1cyber_1_1record_1_1RecordReader}{apollo\-::cyber\-::record\-::\-Record\-Reader}; using \hyperlink{classapollo_1_1cyber_1_1record_1_1RecordWriter}{apollo\-::cyber\-::record\-::\-Record\-Writer}; using \hyperlink{structapollo_1_1cyber_1_1record_1_1RecordMessage}{apollo\-::cyber\-::record\-::\-Record\-Message}; using \hyperlink{structapollo_1_1cyber_1_1message_1_1RawMessage}{apollo\-::cyber\-::message\-::\-Raw\-Message};}
+
+{\ttfamily const char C\-H\-A\-N\-N\-E\-L\-\_\-\-N\-A\-M\-E\-\_\-1\mbox{[}\mbox{]} = \char`\"{}/test/channel1\char`\"{}; const char C\-H\-A\-N\-N\-E\-L\-\_\-\-N\-A\-M\-E\-\_\-2\mbox{[}\mbox{]} = \char`\"{}/test/channel2\char`\"{}; const char M\-E\-S\-S\-A\-G\-E\-\_\-\-T\-Y\-P\-E\-\_\-1\mbox{[}\mbox{]} = \char`\"{}apollo.\-cyber.\-proto.\-Test\char`\"{}; const char M\-E\-S\-S\-A\-G\-E\-\_\-\-T\-Y\-P\-E\-\_\-2\mbox{[}\mbox{]} = \char`\"{}apollo.\-cyber.\-proto.\-Channel\char`\"{}; const char P\-R\-O\-T\-O\-\_\-\-D\-E\-S\-C\mbox{[}\mbox{]} = \char`\"{}1234567890\char`\"{}; const char S\-T\-R\-\_\-10\-B\mbox{[}\mbox{]} = \char`\"{}1234567890\char`\"{}; const char T\-E\-S\-T\-\_\-\-F\-I\-L\-E\mbox{[}\mbox{]} = \char`\"{}test.\-record\char`\"{};}
+
+{\ttfamily void test\-\_\-write(const std\-::string \&writefile) \{ Record\-Writer writer; writer.\-Set\-Size\-Of\-File\-Segmentation(0); writer.\-Set\-Interval\-Of\-File\-Segmentation(0); writer.\-Open(writefile); writer.\-Write\-Channel(\-C\-H\-A\-N\-N\-E\-L\-\_\-\-N\-A\-M\-E\-\_\-1, M\-E\-S\-S\-A\-G\-E\-\_\-\-T\-Y\-P\-E\-\_\-1, P\-R\-O\-T\-O\-\_\-\-D\-E\-S\-C); for (uint32\-\_\-t i = 0; i $<$ 100; ++i) \{ auto msg = std\-::make\-\_\-shared$<$\-Raw\-Message$>$(\char`\"{}abc\char`\"{} + std\-::to\-\_\-string(i)); writer.\-Write\-Message(C\-H\-A\-N\-N\-E\-L\-\_\-\-N\-A\-M\-E\-\_\-1, msg, 888 + i); \} writer.\-Close(); \}}
+
+{\ttfamily void test\-\_\-read(const std\-::string \&readfile) \{ Record\-Reader reader(readfile); Record\-Message message; uint64\-\_\-t msg\-\_\-count = reader.\-Get\-Message\-Number(\-C\-H\-A\-N\-N\-E\-L\-\_\-\-N\-A\-M\-E\-\_\-1); A\-I\-N\-F\-O $<$$<$ \char`\"{}\-M\-S\-G\-T\-Y\-P\-E\-: \char`\"{} $<$$<$ reader.\-Get\-Message\-Type(\-C\-H\-A\-N\-N\-E\-L\-\_\-\-N\-A\-M\-E\-\_\-1); A\-I\-N\-F\-O $<$$<$ \char`\"{}\-M\-S\-G\-D\-E\-S\-C\-: \char`\"{} $<$$<$ reader.\-Get\-Proto\-Desc(\-C\-H\-A\-N\-N\-E\-L\-\_\-\-N\-A\-M\-E\-\_\-1);}
+
+{\ttfamily  // read all message uint64\-\_\-t i = 0; uint64\-\_\-t valid = 0; for (i = 0; i $<$ msg\-\_\-count; ++i) \{ if (reader.\-Read\-Message(\&message)) \{ A\-I\-N\-F\-O $<$$<$ \char`\"{}msg\mbox{[}\char`\"{} $<$$<$ i $<$$<$ \char`\"{}\mbox{]}-\/$>$ \char`\"{} $<$$<$ \char`\"{}channel name\-: \char`\"{} $<$$<$ message.\-channel\-\_\-name $<$$<$ \char`\"{}; content\-: \char`\"{} $<$$<$ message.\-content $<$$<$ \char`\"{}; msg time\-: \char`\"{} $<$$<$ message.\-time; valid++; \} else \{ A\-E\-R\-R\-O\-R $<$$<$ \char`\"{}read msg\mbox{[}\char`\"{} $<$$<$ i $<$$<$ \char`\"{}\mbox{]} failed\char`\"{}; \} \} A\-I\-N\-F\-O $<$$<$ \char`\"{}static msg=================\char`\"{}; A\-I\-N\-F\-O $<$$<$ \char`\"{}\-M\-S\-G validmsg\-:totalcount\-: \char`\"{} $<$$<$ valid $<$$<$ \char`\"{}\-:\char`\"{} $<$$<$ msg\-\_\-count; \}}
+
+{\ttfamily int main(int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}) \{ apollo\-::cyber\-::\-Init(argv\mbox{[}0\mbox{]}); test\-\_\-write(\-T\-E\-S\-T\-\_\-\-F\-I\-L\-E); sleep(1); test\-\_\-read(\-T\-E\-S\-T\-\_\-\-F\-I\-L\-E); return 0; \} ``` \paragraph*{Build and run}}
+
+{\ttfamily 
+\begin{DoxyItemize}
+\item Build\-: bazel build cyber/examples/…
+\item Run\-: ./bazel-\/bin/cyber/examples/record
+\item Examining result\-:
+\end{DoxyItemize}}
+
+{\ttfamily ``` I1124 16\-:56\-:27.\-248200 15118 record.\-cc\-:64\mbox{]} \mbox{[}record\mbox{]} msg\mbox{[}0\mbox{]}-\/$>$ channel name\-: /test/channel1; content\-: abc0; msg time\-: 888 I1124 16\-:56\-:27.\-248227 15118 record.\-cc\-:64\mbox{]} \mbox{[}record\mbox{]} msg\mbox{[}1\mbox{]}-\/$>$ channel name\-: /test/channel1; content\-: abc1; msg time\-: 889 I1124 16\-:56\-:27.\-248239 15118 record.\-cc\-:64\mbox{]} \mbox{[}record\mbox{]} msg\mbox{[}2\mbox{]}-\/$>$ channel name\-: /test/channel1; content\-: abc2; msg time\-: 890 I1124 16\-:56\-:27.\-248252 15118 record.\-cc\-:64\mbox{]} \mbox{[}record\mbox{]} msg\mbox{[}3\mbox{]}-\/$>$ channel name\-: /test/channel1; content\-: abc3; msg time\-: 891 I1124 16\-:56\-:27.\-248297 15118 record.\-cc\-:64\mbox{]} \mbox{[}record\mbox{]} msg\mbox{[}4\mbox{]}-\/$>$ channel name\-: /test/channel1; content\-: abc4; msg time\-: 892 I1124 16\-:56\-:27.\-248378 15118 record.\-cc\-:64\mbox{]} \mbox{[}record\mbox{]} msg\mbox{[}5\mbox{]}-\/$>$ channel name\-: /test/channel1; content\-: abc5; msg time\-: 893 ... I1124 16\-:56\-:27.\-250422 15118 record.\-cc\-:73\mbox{]} \mbox{[}record\mbox{]} static msg================= I1124 16\-:56\-:27.\-250434 15118 record.\-cc\-:74\mbox{]} \mbox{[}record\mbox{]} M\-S\-G validmsg\-:totalcount\-: 100\-:100 ```}
+
+{\ttfamily \subsection*{A\-P\-I Directory}}
+
+{\ttfamily }
+
+{\ttfamily \subsubsection*{Node A\-P\-I}}
+
+{\ttfamily  For additional information and examples, refer to \href{#node}{\tt Node}}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C //create writer with user-\/define attr and message type auto Create\-Writer(const proto\-::\-Role\-Attributes\& role\-\_\-attr) -\/$>$ std\-::shared\-\_\-ptr$<$transport\-::\-Writer$<$\-Message\-T$>$$>$; //create reader with user-\/define attr, callback and message type auto Create\-Reader(const proto\-::\-Role\-Attributes\& role\-\_\-attr, const croutine\-::\-C\-Routine\-Func$<$\-Message\-T$>$\& reader\-\_\-func) -\/$>$ std\-::shared\-\_\-ptr$<$transport\-::\-Reader$<$\-Message\-T$>$$>$; //create writer with specific channel name and message type auto Create\-Writer(const std\-::string\& channel\-\_\-name) -\/$>$ std\-::shared\-\_\-ptr$<$transport\-::\-Writer$<$\-Message\-T$>$$>$; //create reader with specific channel name, callback and message type auto Create\-Reader(const std\-::string\& channel\-\_\-name, const croutine\-::\-C\-Routine\-Func$<$\-Message\-T$>$\& reader\-\_\-func) -\/$>$ std\-::shared\-\_\-ptr$<$transport\-::\-Reader$<$\-Message\-T$>$$>$; //create reader with user-\/define config, callback and message type auto Create\-Reader(const Reader\-Config\& config, const Callback\-Func$<$\-Message\-T$>$\& reader\-\_\-func) -\/$>$ std\-::shared\-\_\-ptr$<$cybertron\-::\-Reader$<$\-Message\-T$>$$>$; //create service with name and specific callback auto Create\-Service(const std\-::string\& service\-\_\-name, const typename service\-::\-Service$<$\-Request, Response$>$\-::\-Service\-Callback\& service\-\_\-calllback) -\/$>$ std\-::shared\-\_\-ptr$<$service\-::\-Service$<$\-Request, Response$>$$>$; //create client with name to send request to server auto Create\-Client(const std\-::string\& service\-\_\-name) -\/$>$ std\-::shared\-\_\-ptr$<$service\-::\-Client$<$\-Request, Response$>$$>$;}
+
+{\ttfamily ```}
+
+{\ttfamily \subsection*{Writer A\-P\-I}}
+
+{\ttfamily  For additional information and examples, refer to \href{#writer}{\tt Writer}}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C bool Write(const std\-::shared\-\_\-ptr$<$\-Message\-T$>$\& message); ```}
+
+{\ttfamily \subsection*{Client A\-P\-I}}
+
+{\ttfamily  For additional information and examples, refer to \href{#service-creation-and-use}{\tt Client}}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C Shared\-Response Send\-Request(Shared\-Request request, const std\-::chrono\-::seconds\& timeout\-\_\-s = std\-::chrono\-::seconds(5));Shared\-Response Send\-Request(const Request\& request, const std\-::chrono\-::seconds\& timeout\-\_\-s = std\-::chrono\-::seconds(5)); ```}
+
+{\ttfamily \subsection*{Parameter A\-P\-I}}
+
+{\ttfamily }
+
+{\ttfamily The interface that the user uses to perform parameter related operations\-:}
+
+{\ttfamily 
+\begin{DoxyItemize}
+\item Set the parameter related A\-P\-I.
+\item Read the parameter related A\-P\-I.
+\item Create a Parameter\-Service to provide parameter service related A\-P\-Is for other nodes.
+\item Create a Parameter\-Client that uses the parameters provided by other nodes to service related A\-P\-Is.
+\end{DoxyItemize}}
+
+{\ttfamily For additional information and examples, refer to \href{##param-parameter-service}{\tt Parameter}}
+
+{\ttfamily \subsubsection*{A\-P\-I List -\/ Setting parameters}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C Parameter(); // Name is empty, type is N\-O\-T\-\_\-\-S\-E\-T explicit Parameter(const Parameter\& parameter); explicit Parameter(const std\-::string\& name); // Type is N\-O\-T\-\_\-\-S\-E\-T Parameter(const std\-::string\& name, const bool bool\-\_\-value); Parameter(const std\-::string\& name, const int int\-\_\-value); Parameter(const std\-::string\& name, const int64\-\_\-t int\-\_\-value); Parameter(const std\-::string\& name, const float double\-\_\-value); Parameter(const std\-::string\& name, const double double\-\_\-value); Parameter(const std\-::string\& name, const std\-::string\& string\-\_\-value); Parameter(const std\-::string\& name, const char$\ast$ string\-\_\-value); Parameter(const std\-::string\& name, const std\-::string\& msg\-\_\-str, const std\-::string\& full\-\_\-name, const std\-::string\& proto\-\_\-desc); Parameter(const std\-::string\& name, const google\-::protobuf\-::\-Message\& msg); ```}
+
+{\ttfamily \subsubsection*{A\-P\-I List -\/ Reading parameters}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C inline Param\-Type type() const; inline std\-::string Type\-Name() const; inline std\-::string Descriptor() const; inline const std\-::string Name() const; inline bool As\-Bool() const; inline int64\-\_\-t As\-Int64() const; inline double As\-Double() const; inline const std\-::string As\-String() const; std\-::string Debug\-String() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-base\-\_\-of$<$google\-::protobuf\-::\-Message, Type$>$\-::value, Type$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-integral$<$\-Type$>$\-::value \&\& !std\-::is\-\_\-same$<$\-Type, bool$>$\-::value, Type$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-floating\-\_\-point$<$\-Type$>$\-::value, Type$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-convertible$<$\-Type, std\-::string$>$\-::value, const std\-::string\&$>$\-::type value() const; template $<$typename type$>$=\char`\"{}\char`\"{}$>$ typename std\-::enable\-\_\-if$<$std\-::is\-\_\-same$<$\-Type, bool$>$\-::value, bool$>$\-::type value() const; ```}
+
+{\ttfamily \subsubsection*{A\-P\-I List -\/ Creating parameter service}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C explicit Parameter\-Service(const std\-::shared\-\_\-ptr$<$\-Node$>$\& node); void Set\-Parameter(const Parameter\& parameter); bool Get\-Parameter(const std\-::string\& param\-\_\-name, Parameter$\ast$ parameter); bool List\-Parameters(std\-::vector$<$\-Parameter$>$$\ast$ parameters);}
+
+{\ttfamily ```}
+
+{\ttfamily \subsubsection*{A\-P\-I List -\/ Creating parameter client}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C Parameter\-Client(const std\-::shared\-\_\-ptr$<$\-Node$>$\& node, const std\-::string\& service\-\_\-node\-\_\-name); bool Set\-Parameter(const Parameter\& parameter); bool Get\-Parameter(const std\-::string\& param\-\_\-name, Parameter$\ast$ parameter); bool List\-Parameters(std\-::vector$<$\-Parameter$>$$\ast$ parameters); ```}
+
+{\ttfamily \subsection*{Timer A\-P\-I}}
+
+{\ttfamily  You can set the parameters of the Timer and call the start and stop interfaces to start the timer and stop the timer. For additional information and examples, refer to \href{#timer}{\tt Timer}}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C Timer(uint32\-\_\-t period, std\-::function$<$void()$>$ callback, bool oneshot); Timer(\-Timer\-Option opt); void Set\-Timer\-Option(\-Timer\-Option opt); void Start(); void Stop(); ```}
+
+{\ttfamily \subsection*{Time A\-P\-I}}
+
+{\ttfamily  For additional information and examples, refer to \href{#use-of-time}{\tt Time}}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C static const Time M\-A\-X; static const Time M\-I\-N; Time() \{\} explicit Time(uint64\-\_\-t nanoseconds); explicit Time(int nanoseconds); explicit Time(double seconds); Time(uint32\-\_\-t seconds, uint32\-\_\-t nanoseconds); Time(const Time\& other); static Time Now(); static Time Mono\-Time(); static void Sleep\-Until(const Time\& time); double To\-Second() const; uint64\-\_\-t To\-Nanosecond() const; std\-::string To\-String() const; bool Is\-Zero() const; ```}
+
+{\ttfamily \subsection*{Duration A\-P\-I}}
+
+{\ttfamily  Interval-\/related interface, used to indicate the time interval, can be initialized according to the specified nanosecond or second.}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C \hyperlink{namespaceapollo_1_1cyber_1_1croutine_aae31aee73e46be40ab635496b4d9d1e2}{Duration()} \{\} Duration(int64\-\_\-t nanoseconds); Duration(int nanoseconds); Duration(double seconds); Duration(uint32\-\_\-t seconds, uint32\-\_\-t nanoseconds); Duration(const Rate\& rate); Duration(const Duration\& other); double To\-Second() const; int64\-\_\-t To\-Nanosecond() const; bool Is\-Zero() const; void Sleep() const; ```}
+
+{\ttfamily \subsection*{Rate A\-P\-I}}
+
+{\ttfamily  The frequency interface is generally used to initialize the time of the sleep frequency after the object is initialized according to the specified frequency.}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C Rate(double frequency); Rate(uint64\-\_\-t nanoseconds); Rate(const Duration\&); void Sleep(); void Reset(); Duration Cycle\-Time() const; Duration Expected\-Cycle\-Time() const \{ return expected\-\_\-cycle\-\_\-time\-\_\-; \} ```}
+
+{\ttfamily \subsection*{Record\-Reader A\-P\-I}}
+
+{\ttfamily  The interface for reading the record file is used to read the message and channel information in the record file.}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C Record\-Reader(); bool Open(const std\-::string\& filename, uint64\-\_\-t begin\-\_\-time = 0, uint64\-\_\-t end\-\_\-time = U\-I\-N\-T64\-\_\-\-M\-A\-X); void Close(); bool Read\-Message(); bool End\-Of\-File(); const std\-::string\& Current\-Message\-Channel\-Name(); std\-::shared\-\_\-ptr$<$\-Raw\-Message$>$ Current\-Raw\-Message(); uint64\-\_\-t Current\-Message\-Time(); ```}
+
+{\ttfamily \subsection*{Record\-Writer A\-P\-I}}
+
+{\ttfamily  The interface for writing the record file, used to record the message and channel information into the record file.}
+
+{\ttfamily \subsubsection*{A\-P\-I List}}
+
+{\ttfamily }
+
+{\ttfamily ```\-C Record\-Writer(); bool Open(const std\-::string\& file); void Close(); bool Write\-Channel(const std\-::string\& name, const std\-::string\& type, const std\-::string\& proto\-\_\-desc); template $<$typename messaget$>$=\char`\"{}\char`\"{}$>$ bool Write\-Message(const std\-::string\& channel\-\_\-name, const Message\-T\& message, const uint64\-\_\-t time\-\_\-nanosec, const std\-::string\& proto\-\_\-desc = \char`\"{}\char`\"{}); bool Set\-Size\-Of\-File\-Segmentation(uint64\-\_\-t size\-\_\-kilobytes); bool Set\-Interval\-Of\-File\-Segmentation(uint64\-\_\-t time\-\_\-sec); ``` }

@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classcyber__py_1_1record_1_1RecordReader" kind="class" prot="public">
+    <compoundname>cyber_py::record::RecordReader</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classcyber__py_1_1record_1_1RecordReader_1a4477f9d5f2cbc0f7b30fc77223f3d89e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.record.RecordReader::record_reader</definition>
+        <argsstring></argsstring>
+        <name>record_reader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="48" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1ae1675795a460676ce3b860f834e56058" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.__init__</definition>
+        <argsstring></argsstring>
+        <name>__init__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="47" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="47" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1a686bc86351940d891137de4105e8c623" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.__del__</definition>
+        <argsstring></argsstring>
+        <name>__del__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="50" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="50" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1a69bf49674d4888f3e46f50c17ae28b47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.read_messages</definition>
+        <argsstring></argsstring>
+        <name>read_messages</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Read message from bag file.
+@param self
+@param start_time:
+@param end_time:
+@return: generator of (message, data_type, timestamp)
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="53" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="53" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1a791219aa5d7c9f1a297bf2df08236dd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.get_messagenumber</definition>
+        <argsstring></argsstring>
+        <name>get_messagenumber</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return message count.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="72" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="72" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1aea88f92c5a6a99c1e60ab55f8de36d8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.get_messagetype</definition>
+        <argsstring></argsstring>
+        <name>get_messagetype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return message type.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="79" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="79" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1a14dd6d3103f79d20f128cd62c4445ab0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.get_protodesc</definition>
+        <argsstring></argsstring>
+        <name>get_protodesc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return message protodesc.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="86" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="86" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1ace780ed8cc01f1b07699788c567d4439" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.get_headerstring</definition>
+        <argsstring></argsstring>
+        <name>get_headerstring</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return message header string.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="93" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="93" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1ab6771cc37151e1330f3fe650bbbdbe8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.reset</definition>
+        <argsstring></argsstring>
+        <name>reset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return reset.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="99" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="99" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordReader_1a9cfcc842e5bd70c08edc96f29ae4729f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordReader.get_channellist</definition>
+        <argsstring></argsstring>
+        <name>get_channellist</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return channel list.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="105" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="105" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Class for cyber RecordReader wrapper.
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="21">
+        <label>object</label>
+      </node>
+      <node id="20">
+        <label>cyber_py.record.RecordReader</label>
+        <link refid="classcyber__py_1_1record_1_1RecordReader"/>
+        <childnode refid="21" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="23">
+        <label>object</label>
+      </node>
+      <node id="22">
+        <label>cyber_py.record.RecordReader</label>
+        <link refid="classcyber__py_1_1record_1_1RecordReader"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="42" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="42" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1a686bc86351940d891137de4105e8c623" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>__del__</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1ae1675795a460676ce3b860f834e56058" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>__init__</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1a9cfcc842e5bd70c08edc96f29ae4729f" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>get_channellist</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1ace780ed8cc01f1b07699788c567d4439" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>get_headerstring</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1a791219aa5d7c9f1a297bf2df08236dd9" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>get_messagenumber</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1aea88f92c5a6a99c1e60ab55f8de36d8d" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>get_messagetype</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1a14dd6d3103f79d20f128cd62c4445ab0" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>get_protodesc</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1a69bf49674d4888f3e46f50c17ae28b47" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>read_messages</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1a4477f9d5f2cbc0f7b30fc77223f3d89e" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>record_reader</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordReader_1ab6771cc37151e1330f3fe650bbbdbe8c" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordReader</scope><name>reset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

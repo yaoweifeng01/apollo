@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classcyber__py_1_1record_1_1RecordWriter" kind="class" prot="public">
+    <compoundname>cyber_py::record::RecordWriter</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classcyber__py_1_1record_1_1RecordWriter_1a398f5c011e8d8cc9dee542305ac22491" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.record.RecordWriter::record_writer</definition>
+        <argsstring></argsstring>
+        <name>record_writer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="120" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1a14355714b318d04fb18339670b9bcb82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.__init__</definition>
+        <argsstring></argsstring>
+        <name>__init__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="118" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="119" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1a03d3d431dedf40f2a865cc6caedc27b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.__del__</definition>
+        <argsstring></argsstring>
+        <name>__del__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="126" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="126" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1a1611664ff3f964ccd5821b0c5a2a8a85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.open</definition>
+        <argsstring></argsstring>
+        <name>open</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Open record file for write.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="129" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="129" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1a4876cf6805312cfd344e12e6474f72ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.close</definition>
+        <argsstring></argsstring>
+        <name>close</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Close record file.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="135" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="135" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1a4cc5a7287e73a42fa9bf4bbca226e84f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.write_channel</definition>
+        <argsstring></argsstring>
+        <name>write_channel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Writer channel by channelname,typename,protodesc
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="141" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="141" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1a418eef3592ac895d1c57d127a3d979d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.write_message</definition>
+        <argsstring></argsstring>
+        <name>write_message</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Writer msg:channelname,rawmsg,writer time
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="148" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="148" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1adf89b0a90fda34422edb0b5a36d7066a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.set_size_fileseg</definition>
+        <argsstring></argsstring>
+        <name>set_size_fileseg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return filesegment size.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="165" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="165" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1ae03b486b593d1818b06a9f9b7c45bdea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.set_intervaltime_fileseg</definition>
+        <argsstring></argsstring>
+        <name>set_intervaltime_fileseg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return file interval time.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="172" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="172" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1a4e13eb41d36533dbaeedf7ec135576a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.get_messagenumber</definition>
+        <argsstring></argsstring>
+        <name>get_messagenumber</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return message count.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="179" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="179" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1aaa2ebabc7fa95b2cf789f520e9b7a8a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.get_messagetype</definition>
+        <argsstring></argsstring>
+        <name>get_messagetype</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return message type.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="186" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="186" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1record_1_1RecordWriter_1aae735e92351317e894f403ed542313ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.record.RecordWriter.get_protodesc</definition>
+        <argsstring></argsstring>
+        <name>get_protodesc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Return message protodesc.
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="193" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="193" bodyend="199"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Class for cyber RecordWriter wrapper.
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="24">
+        <label>cyber_py.record.RecordWriter</label>
+        <link refid="classcyber__py_1_1record_1_1RecordWriter"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>object</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="26">
+        <label>cyber_py.record.RecordWriter</label>
+        <link refid="classcyber__py_1_1record_1_1RecordWriter"/>
+        <childnode refid="27" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>object</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="112" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="112" bodyend="199"/>
+    <listofallmembers>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a03d3d431dedf40f2a865cc6caedc27b6" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>__del__</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a14355714b318d04fb18339670b9bcb82" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>__init__</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a4876cf6805312cfd344e12e6474f72ae" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>close</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a4e13eb41d36533dbaeedf7ec135576a9" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>get_messagenumber</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1aaa2ebabc7fa95b2cf789f520e9b7a8a3" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>get_messagetype</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1aae735e92351317e894f403ed542313ec" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>get_protodesc</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a1611664ff3f964ccd5821b0c5a2a8a85" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>open</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a398f5c011e8d8cc9dee542305ac22491" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>record_writer</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1ae03b486b593d1818b06a9f9b7c45bdea" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>set_intervaltime_fileseg</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1adf89b0a90fda34422edb0b5a36d7066a" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>set_size_fileseg</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a4cc5a7287e73a42fa9bf4bbca226e84f" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>write_channel</name></member>
+      <member refid="classcyber__py_1_1record_1_1RecordWriter_1a418eef3592ac895d1c57d127a3d979d2" prot="public" virt="non-virtual"><scope>cyber_py::record::RecordWriter</scope><name>write_message</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

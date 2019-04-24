@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classcyber__py_1_1cyber__timer_1_1Timer" kind="class" prot="public">
+    <compoundname>cyber_py::cyber_timer::Timer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classcyber__py_1_1cyber__timer_1_1Timer_1ab6eced17f6b54dbead937056a3e11def" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.cyber_timer.Timer::timer</definition>
+        <argsstring></argsstring>
+        <name>timer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="60" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcyber__py_1_1cyber__timer_1_1Timer_1a12707e11d95087467579b69228e0bfbe" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.cyber_timer.Timer::timer_cb</definition>
+        <argsstring></argsstring>
+        <name>timer_cb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="62" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcyber__py_1_1cyber__timer_1_1Timer_1a097dc3bac9a12163355d050d51dfb31b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.cyber_timer.Timer::f_ptr_cb</definition>
+        <argsstring></argsstring>
+        <name>f_ptr_cb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="63" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcyber__py_1_1cyber__timer_1_1Timer_1ad8c0267e9f4833c0adc21ad6f4769c77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.cyber_timer.Timer.__init__</definition>
+        <argsstring></argsstring>
+        <name>__init__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>period The period of the timer, unit is ms
+callback The tasks that the timer needs to perform
+oneshot 1: perform the callback only after the first timing cycle
+0:perform the callback every timed period
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="52" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="52" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1cyber__timer_1_1Timer_1a26e22ab1e79b079b021357c24c25d018" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.cyber_timer.Timer.__del__</definition>
+        <argsstring></argsstring>
+        <name>__del__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="67" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="67" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1cyber__timer_1_1Timer_1a68ec829dc37bfd878a96674964e80a14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.cyber_timer.Timer.set_option</definition>
+        <argsstring></argsstring>
+        <name>set_option</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>period The period of the timer, unit is ms
+callback The tasks that the timer needs to perform
+oneshot 1: perform the callback only after the first timing cycle
+0:perform the callback every timed period
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="70" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="70" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1cyber__timer_1_1Timer_1a8cb7bd524d4a9162ef3cbc664dc14c44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.cyber_timer.Timer.start</definition>
+        <argsstring></argsstring>
+        <name>start</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="82" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1cyber__timer_1_1Timer_1a7ae0beb18d25bf342224f51753c92939" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.cyber_timer.Timer.stop</definition>
+        <argsstring></argsstring>
+        <name>stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="85" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="85" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Class for cyber timer wrapper.
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="33">
+        <label>object</label>
+      </node>
+      <node id="32">
+        <label>cyber_py.cyber_timer.Timer</label>
+        <link refid="classcyber__py_1_1cyber__timer_1_1Timer"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="35">
+        <label>object</label>
+      </node>
+      <node id="34">
+        <label>cyber_py.cyber_timer.Timer</label>
+        <link refid="classcyber__py_1_1cyber__timer_1_1Timer"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="46" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="46" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1a26e22ab1e79b079b021357c24c25d018" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>__del__</name></member>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1ad8c0267e9f4833c0adc21ad6f4769c77" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>__init__</name></member>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1a097dc3bac9a12163355d050d51dfb31b" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>f_ptr_cb</name></member>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1a68ec829dc37bfd878a96674964e80a14" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>set_option</name></member>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1a8cb7bd524d4a9162ef3cbc664dc14c44" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>start</name></member>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1a7ae0beb18d25bf342224f51753c92939" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>stop</name></member>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1ab6eced17f6b54dbead937056a3e11def" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>timer</name></member>
+      <member refid="classcyber__py_1_1cyber__timer_1_1Timer_1a12707e11d95087467579b69228e0bfbe" prot="public" virt="non-virtual"><scope>cyber_py::cyber_timer::Timer</scope><name>timer_cb</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
