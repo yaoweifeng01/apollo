@@ -84,3 +84,8 @@ docs/demo_guide/*.bag
 
 # Logs
 cyber/log/*
+
+# cyber doxy
+cyber/docs/html_cpp
+cyber/docs/html_py
+cyber/site
