@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespacecyber__py_1_1record" kind="namespace">
+    <compoundname>cyber_py::record</compoundname>
+    <innerclass refid="classcyber__py_1_1record_1_1RecordReader" prot="public">cyber_py::record::RecordReader</innerclass>
+    <innerclass refid="classcyber__py_1_1record_1_1RecordWriter" prot="public">cyber_py::record::RecordWriter</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacecyber__py_1_1record_1a6c55a0934d295d6dcc470358cd211d0e" prot="public" static="no" mutable="no">
+        <type>list</type>
+        <definition>list cyber_py::record.CYBER_PATH</definition>
+        <argsstring></argsstring>
+        <name>CYBER_PATH</name>
+        <initializer>= os.environ[&apos;CYBER_PATH&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="27" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacecyber__py_1_1record_1a4323c7b4cd51c5ede88eb2e0be39777c" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple cyber_py::record.CYBER_DIR</definition>
+        <argsstring></argsstring>
+        <name>CYBER_DIR</name>
+        <initializer>= os.path.split(<ref refid="namespacecyber__py_1_1record_1a6c55a0934d295d6dcc470358cd211d0e" kindref="member">CYBER_PATH</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="28" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacecyber__py_1_1record_1ac65574da5ad067a81b20c676bfa06920" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple cyber_py::record._CYBER_RECORD</definition>
+        <argsstring></argsstring>
+        <name>_CYBER_RECORD</name>
+        <initializer>= importlib.import_module(&apos;_cyber_record&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="37" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacecyber__py_1_1record_1a98b1a8de6dbf0dd9149a7c83db60d880" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple cyber_py::record.PyBagMessage</definition>
+        <argsstring></argsstring>
+        <name>PyBagMessage</name>
+        <initializer>= collections.namedtuple(&apos;PyBagMessage&apos;,
+                                      &apos;topic message data_type timestamp&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="38" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/record.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

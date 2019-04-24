@@ -1,0 +1,75 @@
+\subsection*{What is Apollo Cyber R\-T?}
+
+Apollo's Cyber R\-T is an open source runtime framework designed specifically for autonomous driving scenarios. Based on a centralized computing model, it is highly optimized for performance, latency, and data throughput 
+
+
+
+\subsection*{Why did we decide to work on a new runtime framework?}
+
+
+\begin{DoxyItemize}
+\item During years of development of autonomous driving technologies, we have learned a lot from our previous experience with Apollo. In autonomous driving scenarious, we need an effective centralized computing model, with demands for high performance, including high concurrency, low latency and high throughput。
+\item The industry is evolving, so does Apollo. Going forward, Apollo has already moved from development to productization, with volume deployments in the real world, we see the demands for the highest robustness and high performance. That’s why we spent years of building Apollo Cyber R\-T, which addresses that requirements of autonomous driving solutions. 
+
+
+\end{DoxyItemize}
+
+\subsection*{What are the advantages of the new runtime framework?}
+
+
+\begin{DoxyItemize}
+\item Accelerate development
+\begin{DoxyItemize}
+\item Well defined task interface with data fusion
+\item Array of development tools
+\item Large set of sensor drivers
+\end{DoxyItemize}
+\item Simplify deployment
+\begin{DoxyItemize}
+\item Efficient and adaptive message communication
+\item Configurable user level scheduler with resource awareness
+\item Portable with fewer dependencies
+\end{DoxyItemize}
+\item Empower your own autonomous vehicles
+\begin{DoxyItemize}
+\item The default open source runtime framework
+\item Building blocks specifically designed for autonomous driving
+\item Plug and play your own A\-D system 
+
+
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsection*{Can we still use the data that we have collected?}
+
+
+\begin{DoxyItemize}
+\item If the data you have collected is compatible with the previous versions of Apollo, you could use our recommended conversion tools to make the data compliant with our new runtime framework
+\item If you created a customized data format, then the previously generated data will not be supported by the new runtime framework 
+
+
+\end{DoxyItemize}
+
+\subsection*{Will you continue to support R\-O\-S?}
+
+We will continue to support previous Apollo releases (3.\-0 and before) based on R\-O\-S. We do appreciate you continue growing with us and highly encourage you to move to Apollo 3.\-5. While we know that some of our developers would prefer to work on R\-O\-S, we do hope you will understand why Apollo as a team cannot continue to support R\-O\-S in our future releases as we strive to work towards developing a more holistic platform that meets automotive standards. 
+
+
+
+\subsection*{Will Apollo Cyber R\-T affect regular code development?}
+
+If you have not modified anything at runtime framework layer and have only worked on Apollo's module code base, you will not be affected by the introduction of our new runtime framework as most of time you would only need to re-\/interface the access of the input and output data. Additional documents are under \href{https://github.com/ApolloAuto/apollo/tree/master/docs/cyber/}{\tt cyber} with more details. 
+
+
+
+\subsection*{Recommended setup for Apollo Cyber R\-T}
+
+
+\begin{DoxyItemize}
+\item Currently the runtime framework only supports running on Trusty (Ubuntu 14.\-04)
+\item The runtime framework also uses apollo's docker environment
+\item It is recommended to run source setup.\-bash when opening a new terminal
+\item Fork and clone the Apollo repo with the new framework code which can be found at \href{https://github.com/ApolloAuto/apollo/tree/master/cyber/}{\tt apollo/cyber} 
+
+ More F\-A\-Qs to follow... 
+\end{DoxyItemize}

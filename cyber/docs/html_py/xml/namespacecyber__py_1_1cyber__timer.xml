@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="namespacecyber__py_1_1cyber__timer" kind="namespace">
+    <compoundname>cyber_py::cyber_timer</compoundname>
+    <innerclass refid="classcyber__py_1_1cyber__timer_1_1Timer" prot="public">cyber_py::cyber_timer::Timer</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacecyber__py_1_1cyber__timer_1a5e39704619198cb3a3073f00ae627903" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple cyber_py::cyber_timer.PY_TIMER_CB_TYPE</definition>
+        <argsstring></argsstring>
+        <name>PY_TIMER_CB_TYPE</name>
+        <initializer>= ctypes.CFUNCTYPE(ctypes.c_void_p)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="28" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacecyber__py_1_1cyber__timer_1a9124b960c5d5e162ed68a7d1bdc96982" prot="public" static="no" mutable="no">
+        <type>list</type>
+        <definition>list cyber_py::cyber_timer.CYBER_PATH</definition>
+        <argsstring></argsstring>
+        <name>CYBER_PATH</name>
+        <initializer>= os.environ[&apos;CYBER_PATH&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="31" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacecyber__py_1_1cyber__timer_1a3430bd073705122f7f88b5db7d369fac" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple cyber_py::cyber_timer.CYBER_DIR</definition>
+        <argsstring></argsstring>
+        <name>CYBER_DIR</name>
+        <initializer>= os.path.split(<ref refid="namespacecyber__py_1_1cyber__timer_1a9124b960c5d5e162ed68a7d1bdc96982" kindref="member">CYBER_PATH</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="32" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacecyber__py_1_1cyber__timer_1a8b9d6437312c58af55c4daa4e1474bfe" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple cyber_py::cyber_timer._CYBER_TIMER</definition>
+        <argsstring></argsstring>
+        <name>_CYBER_TIMER</name>
+        <initializer>= importlib.import_module(&apos;_cyber_timer&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="43" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber_timer.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

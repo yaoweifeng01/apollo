@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="classcyber__py_1_1cyber_1_1Writer" kind="class" prot="public">
+    <compoundname>cyber_py::cyber::Writer</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">object</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classcyber__py_1_1cyber_1_1Writer_1aae9aa5c2f9390d4ab157294a29c7d2a2" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.cyber.Writer::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" line="92" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcyber__py_1_1cyber_1_1Writer_1a560cf803725f9c259059956211418582" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.cyber.Writer::writer</definition>
+        <argsstring></argsstring>
+        <name>writer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" line="93" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcyber__py_1_1cyber_1_1Writer_1a9ad78a9c6ec32e9cc9f56cff9c6be6ad" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>cyber_py.cyber.Writer::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" line="94" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcyber__py_1_1cyber_1_1Writer_1a1c8622d8858c2703dedd6527fc1c654b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.cyber.Writer.__init__</definition>
+        <argsstring></argsstring>
+        <name>__init__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" line="91" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" bodystart="91" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classcyber__py_1_1cyber_1_1Writer_1a5ef5ce319cfcb085266ffa8e6cb6cae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def cyber_py.cyber.Writer.write</definition>
+        <argsstring></argsstring>
+        <name>write</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>writer msg string
+</verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" line="96" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" bodystart="96" bodyend="102"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Class for cyber writer wrapper.
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="40">
+        <label>cyber_py.cyber.Writer</label>
+        <link refid="classcyber__py_1_1cyber_1_1Writer"/>
+        <childnode refid="41" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>object</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="42">
+        <label>cyber_py.cyber.Writer</label>
+        <link refid="classcyber__py_1_1cyber_1_1Writer"/>
+        <childnode refid="43" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>object</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" line="85" column="1" bodyfile="/home/work/apollo-fork/apollo/cyber/python/cyber_py/cyber.py" bodystart="85" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classcyber__py_1_1cyber_1_1Writer_1a1c8622d8858c2703dedd6527fc1c654b" prot="public" virt="non-virtual"><scope>cyber_py::cyber::Writer</scope><name>__init__</name></member>
+      <member refid="classcyber__py_1_1cyber_1_1Writer_1a9ad78a9c6ec32e9cc9f56cff9c6be6ad" prot="public" virt="non-virtual"><scope>cyber_py::cyber::Writer</scope><name>data_type</name></member>
+      <member refid="classcyber__py_1_1cyber_1_1Writer_1aae9aa5c2f9390d4ab157294a29c7d2a2" prot="public" virt="non-virtual"><scope>cyber_py::cyber::Writer</scope><name>name</name></member>
+      <member refid="classcyber__py_1_1cyber_1_1Writer_1a5ef5ce319cfcb085266ffa8e6cb6cae2" prot="public" virt="non-virtual"><scope>cyber_py::cyber::Writer</scope><name>write</name></member>
+      <member refid="classcyber__py_1_1cyber_1_1Writer_1a560cf803725f9c259059956211418582" prot="public" virt="non-virtual"><scope>cyber_py::cyber::Writer</scope><name>writer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>CyberRT C++ API</title>
+    <detaileddescription>
+<para>Apollo Cyber RT is an open source, high performance runtime framework designed specifically for autonomous driving scenarios. Based on a centralized computing model, it is greatly optimized for high concurrency, low latency, and high throughput in autonomous driving.</para><para>During the last few years of the development of autonomous driving technologies, we have learned a lot from our previous experience with Apollo. The industry is evolving and so is Apollo. Going forward, Apollo has already moved from development to productization, with volume deployments in the real world, we see the demands for the highest level of robustness and performance. That’s why we spent years building and perfecting Apollo Cyber RT, which addresses that requirements of autonomous driving solutions.</para><para>Key benefits of using Apollo Cyber RT:</para><para><itemizedlist>
+<listitem><para>Accelerate development<itemizedlist>
+<listitem><para>Well defined task interface with data fusion</para></listitem><listitem><para>Array of development tools</para></listitem><listitem><para>Large set of sensor drivers</para></listitem></itemizedlist>
+</para></listitem><listitem><para>Simplify deployment<itemizedlist>
+<listitem><para>Efficient and adaptive message communication</para></listitem><listitem><para>Configurable user level scheduler with resource awareness</para></listitem><listitem><para>Portable with fewer dependencies</para></listitem></itemizedlist>
+</para></listitem><listitem><para>Empower your own autonomous vehicles<itemizedlist>
+<listitem><para>The default open source runtime framework</para></listitem><listitem><para>Building blocks specifically designed for autonomous driving</para></listitem><listitem><para>Plug and play your own AD system</para></listitem></itemizedlist>
+</para></listitem></itemizedlist>
+</para><para><heading level="1">Documents</heading>
+</para><para><itemizedlist>
+<listitem><para>https://github.com/ApolloAuto/apollo/tree/master/docs/cyber/CyberRT_Quick_Start.md &quot;Apollo Cyber RT Quick Start&quot;: Everything you need to know about how to start developing your first application module on top of Apollo Cyber RT.</para></listitem><listitem><para>https://github.com/ApolloAuto/apollo/tree/master/docs/cyber/CyberRT_Developer_Tools.md &quot;Apollo Cyber RT Developer Tools&quot;: Detailed guidance on how to use the developer tools from Apollo Cyber RT.</para></listitem><listitem><para>https://github.com/ApolloAuto/apollo/tree/master/docs/cyber/CyberRT_API_for_Developers.md &quot;Apollo Cyber RT API for Developers&quot;: A comprehensive guide to explore all the APIs of Apollo Cyber RT, with many concrete examples in source code.</para></listitem><listitem><para>https://github.com/ApolloAuto/apollo/tree/master/docs/FAQs/CyberRT_FAQs.md &quot;Apollo Cyber RT FAQs&quot;: Answers to the most frequently asked questions about Apollo Cyber RT.</para></listitem></itemizedlist>
+</para><para>More documents to come soon! </para>    </detaileddescription>
+  </compounddef>
+</doxygen>
