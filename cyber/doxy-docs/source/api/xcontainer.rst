@@ -9,11 +9,6 @@ layout
 
 Defined in ``xtensor/xlayout.hpp``
 
-.. doxygenenum:: xt::layout_type
-   :project: xtensor
-
-.. doxygenfunction:: xt::compute_layout(Args... args)
-   :project: xtensor
 
 xcontainer
 ==========
@@ -21,7 +16,7 @@ xcontainer
 Defined in ``xtensor/xcontainer.hpp``
 
 .. doxygenclass:: xt::xcontainer
-   :project: xtensor
+   :project: cyberrt
    :members:
 
 xstrided_container
@@ -30,6 +25,6 @@ xstrided_container
 Defined in ``xtensor/xcontainer.hpp``
 
 .. doxygenclass:: xt::xstrided_container
-   :project: xtensor
+   :project: cyberrt
    :members:
 

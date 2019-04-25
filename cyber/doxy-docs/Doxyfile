@@ -1,4 +1,4 @@
-PROJECT_NAME      = "xtensor"
+PROJECT_NAME      = "cyberrt"
 XML_OUTPUT        = xml
 INPUT             =  ../node
 GENERATE_LATEX    = NO

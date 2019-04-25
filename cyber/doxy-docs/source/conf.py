@@ -19,12 +19,12 @@ def setup(app):
     app.add_stylesheet("main_stylesheet.css")
 
 extensions = ['breathe']
-breathe_projects = { 'xtensor': '../xml' }
+breathe_projects = { 'cyberrt': '../xml' }
 templates_path = ['_templates']
 html_static_path = ['_static']
 source_suffix = '.rst'
 master_doc = 'index'
-project = 'xtensor'
+project = 'cyberrt'
 copyright = '2016, Johan Mabille, Sylvain Corlay and Wolf Vollprecht'
 author = 'Johan Mabille, Sylvain Corlay and Wolf Vollprecht'
 
