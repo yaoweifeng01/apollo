@@ -28,7 +28,7 @@ project = 'xtensor'
 copyright = '2016, Johan Mabille, Sylvain Corlay and Wolf Vollprecht'
 author = 'Johan Mabille, Sylvain Corlay and Wolf Vollprecht'
 
-html_logo = 'quantstack-white.svg'
+#html_logo = 'quantstack-white.svg'
 
 exclude_patterns = []
 highlight_language = 'c++'

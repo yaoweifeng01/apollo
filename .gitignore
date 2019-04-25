@@ -60,7 +60,8 @@ modules/tools/ota/vehicle_info.pb.txt
 
 # Doxygen
 docs/doxygen
-
+build/
+xml/
 # Esd can lib
 third_party/can_card_library/esd_can/include
 third_party/can_card_library/esd_can/lib
