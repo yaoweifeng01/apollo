@@ -32,6 +32,14 @@ template <typename M0, typename M1, typename M2, typename M3>
 class Component;
 class TimerComponent;
 
+/**
+     * @class Node
+     * @brief .
+     * Node is the fundamental building block of Cyber RT.
+     * every module contains and communicates through the node.
+     * A module can have different types of communication by defining 
+     * read/write and/or service/client in a node.
+     */
 class Node {
  public:
   template <typename M0, typename M1, typename M2, typename M3>
@@ -42,10 +50,20 @@ class Node {
   virtual ~Node();
   const std::string& Name() const;
 
+  /**
+     * @name Create reader and writer
+     */
+  //@{
+  /**
+   * Return the writer.
+   */
   template <typename MessageT>
   auto CreateWriter(const proto::RoleAttributes& role_attr)
       -> std::shared_ptr<Writer<MessageT>>;
 
+  /**
+   * Return the reader.
+   */
   template <typename MessageT>
   auto CreateReader(const std::string& channel_name,
                     const CallbackFunc<MessageT>& reader_func = nullptr)
