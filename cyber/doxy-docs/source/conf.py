@@ -18,15 +18,18 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 def setup(app):
     app.add_stylesheet("main_stylesheet.css")
 
-extensions = ['breathe']
+extensions = ['breathe', 'recommonmark']
 breathe_projects = { 'cyberrt': '../xml' }
 templates_path = ['_templates']
 html_static_path = ['_static']
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 master_doc = 'index'
 project = 'cyberrt'
-copyright = '2016, Johan Mabille, Sylvain Corlay and Wolf Vollprecht'
-author = 'Johan Mabille, Sylvain Corlay and Wolf Vollprecht'
+copyright = '2019, Apollo'
+author = 'Apollo Badidu'
 
 #html_logo = 'quantstack-white.svg'
 
@@ -34,5 +37,5 @@ exclude_patterns = []
 highlight_language = 'c++'
 pygments_style = 'sphinx'
 todo_include_todos = False
-htmlhelp_basename = 'xtensordoc'
+htmlhelp_basename = 'CyberRTdoc'
 
