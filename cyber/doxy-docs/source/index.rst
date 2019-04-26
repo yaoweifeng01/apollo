@@ -1,37 +1,26 @@
-.. Copyright (c) 2016, Johan Mabille, Sylvain Corlay and Wolf Vollprecht
 
 
 
-Multi-dimensional arrays with broadcasting and lazy computing.
+Apollo's Cyber RT is an open source runtime framework designed specifically 
+for autonomous driving scenarios. Based on a centralized computing model, 
+it is highly optimized for performance, latency, and data throughput.
 
 Introduction
 ------------
 
-`xtensor` is a C++ library meant for numerical analysis with multi-dimensional
-array expressions.
-
-`xtensor` provides
-
-- an extensible expression system enabling **lazy broadcasting**.
-- an API following the idioms of the **C++ standard library**.
-- tools to manipulate array expressions and build upon `xtensor`.
-
-
 .. toctree::
-   :caption: INSTALLATION
+   :caption: QUICKSTART
    :maxdepth: 1
 
    installation
    changelog
 
+
+   
 .. toctree::
-   :caption: API REFERENCE
+   :caption: C++ API REFERENCE
    :maxdepth: 2
 
    api/container_index
    api/node_index
 
-.. _NumPy: http://www.numpy.org
-.. _Buffer Protocol: https://docs.python.org/3/c-api/buffer.html
-.. _libdynd: http://libdynd.org
-.. _xtensor-python: https://github.com/QuantStack/xtensor-python

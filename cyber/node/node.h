@@ -39,8 +39,8 @@ class TimerComponent;
  * every module contains and communicates through the node.
  * A module can have different types of communication by defining
  * read/write and/or service/client in a node.
- * @warning Duplicate name is not allowed include node, reader/writer,
- * service/clinet in the topo.
+ * @warning Duplicate name is not allowed in topo objects, such as node,
+ * reader/writer, service/clinet in the topo.
  */
 class Node {
  public:

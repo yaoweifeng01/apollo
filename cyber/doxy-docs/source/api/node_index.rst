@@ -1,15 +1,10 @@
-.. Copyright (c) 2016, Johan Mabille, Sylvain Corlay and Wolf Vollprecht
 
-   Distributed under the terms of the BSD 3-Clause License.
 
-   The full license is in the file LICENSE, distributed with this software.
-
-Readers and writers
+Topological communication
 ====================
 
-Read && writers are in-memory expressions that share a common implementation of most of the methods of the xexpression API.
-The final container classes (``xarray``, ``xtensor``) mainly implement constructors and value semantic, most of the
-xexpression API is actually implemented in ``xstrided_container`` and ``xcontainer``.
+Topological communication is the base ---------. 
+Topological communication APIs is actually implemented in ``node`` and ``reader/writer`` and ``client/service``.
 
 .. toctree::
 
