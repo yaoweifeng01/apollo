@@ -10,7 +10,7 @@ Defined in ``cyber/node/node.h``
    :members:
    :project: cyberrt
 
-xstrided_container
+xstrided_container1
 ==================
 
 Defined in ``xtensor/xcontainer.hpp``

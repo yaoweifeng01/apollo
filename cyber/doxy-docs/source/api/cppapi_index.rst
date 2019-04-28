@@ -8,5 +8,5 @@ Topological communication APIs is actually implemented in ``node`` and ``reader/
 
 .. toctree::
 
-   node
+   cppapi
 

@@ -1,4 +1,4 @@
-CyberRT Terms
+Cyber RT Terms
 =======
 
 This page describes the definitions of the most commonly used terminologies in Cyber RT.
