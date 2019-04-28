@@ -13,16 +13,26 @@ it is highly optimized for performance, latency, and data throughput.
    :caption: QUICKSTART
    :maxdepth: 1
 
-   CyberRT_Quick_Start
-   CyberRT_Developer_Tools.md
-   CyberRT_API_for_Developers
-   CyberRT_FAQs.md
-   CyberRT_Terms.md
-   
+   cyberrt_quick_start
+   cyberrt_terms
+   cyberrt_faqs
+
 .. toctree::
-   :caption: C++ API REFERENCE
+   :caption: TUTORIALS
+   :maxdepth: 2
+   
+   cyberrt_api_for_developers
+   cyberrt_developer_tools
+
+.. toctree::
+   :maxdepth: 2
+   :caption: ADVANCED TOPICS
+
+   cyberrt_migration_guide
+
+.. toctree::
+   :caption: API REFERENCE
    :maxdepth: 2
 
-   api/container_index
-   api/node_index
+   api/cppapi_index
 

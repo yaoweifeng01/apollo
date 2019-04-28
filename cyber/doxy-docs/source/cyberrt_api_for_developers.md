@@ -1,5 +1,5 @@
-# Cyber RT API for Developers
-
+Cyber RT API tutorial
+========
 
 This document provides an extensive technical deep dive into how to create, manipulate and use Cyber RT's API.
 

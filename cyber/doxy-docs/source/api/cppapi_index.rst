@@ -1,6 +1,6 @@
 
 
-Topological communication
+C++ API
 ====================
 
 Topological communication is the base ---------. 
@@ -9,3 +9,4 @@ Topological communication APIs is actually implemented in ``node`` and ``reader/
 .. toctree::
 
    node
+

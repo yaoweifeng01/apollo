@@ -1,7 +1,7 @@
 .. Copyright (c) 2016, Johan Mabille, Sylvain Corlay and Wolf Vollprecht
 
 
-node
+cyber/node/node.h
 ==========
 
 Defined in ``cyber/node/node.h``
