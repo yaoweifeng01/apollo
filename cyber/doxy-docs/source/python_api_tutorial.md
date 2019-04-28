@@ -2,11 +2,9 @@ Python API tutorial
 ========================
 
 In this tutorial we introduce the basic concepts of the CyberRT Python API, as
-well as an overview of its most important functionalities. The reference of all
-classes and methods available can be found at
-[Python API reference](python_api.md).
+well as an overview of its most important functionalities.
 
-!!! note
+``Note:``
     **This document applies only to the latest development version**. The source code is [CyberRT Python API](https://github.com/ApolloAuto/apollo/tree/master/cyber/python)<br>
     
 #### Talker and listener
