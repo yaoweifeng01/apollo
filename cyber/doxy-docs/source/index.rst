@@ -22,6 +22,7 @@ it is highly optimized for performance, latency, and data throughput.
    :maxdepth: 2
    
    cyberrt_api_for_developers
+   python_api_tutorial
    cyberrt_developer_tools
 
 .. toctree::
