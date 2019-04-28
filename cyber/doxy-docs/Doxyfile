@@ -1,6 +1,8 @@
 PROJECT_NAME      = "cyberrt"
 XML_OUTPUT        = xml
-INPUT             =  ../node
+INPUT             =  ../cyber.h ../init.h ../node ../record ../time ../timer ../component
+FILE_PATTERNS     = *.h
+RECURSIVE         = YES
 GENERATE_LATEX    = NO
 GENERATE_MAN      = NO
 GENERATE_RTF      = NO
