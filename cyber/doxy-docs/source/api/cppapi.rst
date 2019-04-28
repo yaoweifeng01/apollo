@@ -2,7 +2,7 @@
 
 
 cyber/node/node.h
-==========
+==================
 
 Defined in ``cyber/node/node.h``
 
@@ -12,7 +12,7 @@ Defined in ``cyber/node/node.h``
 
 
 cyber/node/reader.h
-==========
+====================
 
 Defined in ``cyber/node/reader.h``
 
@@ -22,7 +22,7 @@ Defined in ``cyber/node/reader.h``
 
 
 cyber/node/writer.h
-==========
+====================
 
 Defined in ``cyber/node/writer.h``
 
