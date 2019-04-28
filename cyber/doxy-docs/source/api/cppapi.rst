@@ -10,12 +10,24 @@ Defined in ``cyber/node/node.h``
    :members:
    :project: cyberrt
 
-xstrided_container1
-==================
 
-Defined in ``xtensor/xcontainer.hpp``
+cyber/node/reader.h
+==========
 
-.. doxygenclass:: xt::xstrided_container
-   :project: cyberrt
+Defined in ``cyber/node/reader.h``
+
+.. doxygenclass:: apollo::cyber::Reader
    :members:
+   :project: cyberrt
+
+
+cyber/node/writer.h
+==========
+
+Defined in ``cyber/node/writer.h``
+
+.. doxygenclass:: apollo::cyber::Writer
+   :members:
+   :project: cyberrt
+
 
