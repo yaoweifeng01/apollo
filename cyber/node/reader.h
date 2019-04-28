@@ -68,8 +68,8 @@ class Reader : public ReaderBase {
    * @param role_attr is a protobuf message RoleAttributes, which includes the
    * channel name and other info.
    * @param reader_func is the callback function, when the message is recevied.
-   * @param pending_queue_size is the message cache queue.
-   * @warning the recevied messages is enqueue a queue,the queue's size is
+   * @param pending_queue_size is the max depth of message cache queue.
+   * @warning the recevied messages is enqueue a queue,the queue's depth is
    * pending_queue_size
    */
   explicit Reader(const proto::RoleAttributes& role_attr,
