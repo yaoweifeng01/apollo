@@ -29,7 +29,7 @@ source_suffix = {
 master_doc = 'index'
 project = 'cyberrt'
 copyright = '2019, Apollo'
-author = 'Apollo Badidu'
+author = 'Apollo Baidu'
 
 #html_logo = 'quantstack-white.svg'
 

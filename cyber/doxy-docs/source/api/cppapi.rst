@@ -1,4 +1,3 @@
-.. Copyright (c) 2016, Johan Mabille, Sylvain Corlay and Wolf Vollprecht
 
 
 cyber/node/node.h
