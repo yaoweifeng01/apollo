@@ -19,7 +19,7 @@ def setup(app):
     app.add_stylesheet("main_stylesheet.css")
 
 extensions = ['breathe', 'recommonmark']
-breathe_projects = { 'cyberrt': '../xml' }
+breathe_projects = { 'Cyber RT Documents': '../xml' }
 templates_path = ['_templates']
 html_static_path = ['_static']
 source_suffix = {
@@ -27,7 +27,7 @@ source_suffix = {
     '.md': 'markdown',
 }
 master_doc = 'index'
-project = 'cyberrt'
+project = 'Cyber RT Documents'
 copyright = '2019, Apollo'
 author = 'Apollo Baidu'
 

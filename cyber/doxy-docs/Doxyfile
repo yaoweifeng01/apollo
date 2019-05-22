@@ -1,4 +1,4 @@
-PROJECT_NAME      = "cyberrt"
+PROJECT_NAME      = "Cyber RT Documents"
 XML_OUTPUT        = xml
 INPUT             =  ../cyber.h ../init.h ../node ../record ../time ../timer ../component
 FILE_PATTERNS     = *.h

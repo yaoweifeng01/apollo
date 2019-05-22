@@ -7,7 +7,7 @@ Defined in ``cyber/node/node.h``
 
 .. doxygenclass:: apollo::cyber::Node
    :members:
-   :project: cyberrt
+   :project: Cyber RT Documents 
 
 
 cyber/node/reader.h
@@ -17,7 +17,7 @@ Defined in ``cyber/node/reader.h``
 
 .. doxygenclass:: apollo::cyber::Reader
    :members:
-   :project: cyberrt
+   :project: Cyber RT Documents
 
 
 cyber/node/writer.h
@@ -27,6 +27,6 @@ Defined in ``cyber/node/writer.h``
 
 .. doxygenclass:: apollo::cyber::Writer
    :members:
-   :project: cyberrt
+   :project: Cyber RT Documents
 
 
