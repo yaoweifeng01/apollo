@@ -40,6 +40,10 @@ Defined in python/cyber_py/cyber.py
    :members:
    :project: Cyber RT Documents
 
+.. doxygenclass:: cyber_py::cyber::NodeUtils
+   :members:
+   :project: Cyber RT Documents
+
 
 python/cyber_py/record.py
 ================================
