@@ -38,7 +38,8 @@ _CYBER_RECORD = importlib.import_module('_cyber_record')
 PyBagMessage = collections.namedtuple('PyBagMessage',
                                       'topic message data_type timestamp')
 
-# Record file class
+##
+# @brief record file reader class.
 class RecordReader(object):
     """
     Class for cyber RecordReader wrapper.
@@ -50,14 +51,14 @@ class RecordReader(object):
     def __del__(self):
         _CYBER_RECORD.delete_PyRecordReader(self.record_reader)
 
+    ##
+    # @brief Read message from bag file.
+    #
+    # @param start_time the start time to read.
+    # @param end_time the end time to read.
+    #
+    # @return return (channnel, data, data_type, timestamp)
     def read_messages(self, start_time=0, end_time=18446744073709551615):
-        """
-        Read message from bag file.
-        @param self
-        @param start_time:
-        @param end_time:
-        @return: generator of (message, data_type, timestamp)
-        """
         while True:
             message = _CYBER_RECORD.PyRecordReader_ReadMessage(
                 self.record_reader, start_time, end_time)
@@ -69,17 +70,23 @@ class RecordReader(object):
                 # print "No message more."
                 break
 
+    ##
+    # @brief Return message count of the channel in current record file.
+    #
+    # @param channel_name the channel name.
+    #
+    # @return return the message count.
     def get_messagenumber(self, channel_name):
-        """
-        Return message count.
-        """
         return _CYBER_RECORD.PyRecordReader_GetMessageNumber(
             self.record_reader, channel_name)
 
+    ##
+    # @brief Get the corresponding message type of channel. 
+    #
+    # @param channel_name channel name.
+    #
+    # @return return the name of ther string type.
     def get_messagetype(self, channel_name):
-        """
-        Return message type.
-        """
         return _CYBER_RECORD.PyRecordReader_GetMessageType(
             self.record_reader, channel_name)
 
